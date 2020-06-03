@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="behavior_peekHeight">1920dp</item>
+    </style>
+
+    <!-- 底部弹出框样式 -->
+    <style name="BottomDialog" parent="Theme.Design.BottomSheetDialog">
+        <!--ajustResize会重新布局当前窗口，且需要当前dialog不是浮动的，以此防止输入法弹出遮挡Dialog-->
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateAlwaysHidden</item>
+        <item name="android:colorBackground">#00000000</item>
+        <item name="bottomSheetStyle">@style/BottomSheetModal</item>
+    </style>
+
+    <declare-styleable name="ExcelTableView">
+        <attr name="leftWidth" format="dimension" />
+        <attr name="topHeight" format="dimension" />
+        <attr name="itemHeight" format="dimension" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+
+    <item name="title_layout" type="id" />
+    <item name="search_layout" type="id" />
+
+    <!--沉浸式-->
+    <item type="id" name="statusbarutil_fake_status_bar_view" />
+    <item type="id" name="statusbarutil_translucent_view" />
+
+
+</resources>

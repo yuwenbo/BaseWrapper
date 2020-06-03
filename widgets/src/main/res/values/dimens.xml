@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="excel_cell_default_height">44dp</dimen>
+    <dimen name="excel_left_default_width">115dp</dimen>
+
+</resources>

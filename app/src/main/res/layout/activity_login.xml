@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <usage.ywb.wrapper.commom.widgets.TitleLayout style="@style/title_layout" />
+
+    <EditText
+        android:id="@+id/login_username_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:gravity="center_vertical"
+        android:hint="用户名"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:text="ywb" />
+
+    <AutoCompleteTextView
+        android:id="@+id/login_company_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="公司" />
+
+    <EditText
+        android:id="@+id/login_password_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:hint="密码"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:text="aaa123" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:text="登录" />
+
+</LinearLayout>
+

@@ -1,2 +1,2 @@
-include ':app', ':mvp', ':widgets', ':camera'
+include ':app', ':mvp', ':widgets', ':camera', ':video', ':audio'
 rootProject.name='BaseWrapper'

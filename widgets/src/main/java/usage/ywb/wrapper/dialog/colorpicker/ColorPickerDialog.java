@@ -34,7 +34,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import usage.ywb.personal.widgets.R;
+import usage.ywb.wrapper.widgets.R;
 
 
 public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColorChangedListener,

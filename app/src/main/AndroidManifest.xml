@@ -4,6 +4,7 @@
     package="usage.ywb.wrapper">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name="usage.ywb.wrapper.MyApp"
@@ -17,15 +18,22 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity android:name="usage.ywb.wrapper.modules.home.ui.LoginActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <activity android:name="usage.ywb.wrapper.modules.home.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".modules.home.ui.TestSearchActivity">
+        <activity android:name=".modules.home.ui.TestSearchActivity"/>
 
-        </activity>
+        <activity android:name=".base.activity.ProxyActivity" />
 
     </application>
 

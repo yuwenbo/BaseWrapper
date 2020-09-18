@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#cc0000</color>
+    <color name="white">#ffffff</color>
+    <color name="link">#0099cc</color>
+    <color name="blue">#228ac4</color>
+    <color name="drag">#cc3300</color>
+    <color name="green">#56ffaa</color>
+    <color name="gray">#999999</color>
+    <color name="gray_light">#dfdfdf</color>
+
+    <color name="none">#00000000</color>
+    <color name="custom">#22ffffff</color>
+
+    <color name="line">#990099cc</color>
+
+</resources>

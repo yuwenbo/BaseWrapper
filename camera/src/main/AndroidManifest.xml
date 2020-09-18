@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="usage.ywb.personal.camera">
+    package="usage.ywb.wrapper.camera">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="usage.ywb.personal.camera.activity.MainActivity">
+        <activity android:name="usage.ywb.wrapper.camera.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name="usage.ywb.personal.camera.activity.CaptureActivity"
+            android:name="usage.ywb.wrapper.camera.activity.CaptureActivity"
             android:hardwareAccelerated="true"
             android:theme="@style/full_screen" />
 

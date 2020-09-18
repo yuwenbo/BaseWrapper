@@ -16,7 +16,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import usage.ywb.personal.widgets.R;
+import usage.ywb.wrapper.widgets.R;
 
 /**
  * drawable与文本一起居中显示

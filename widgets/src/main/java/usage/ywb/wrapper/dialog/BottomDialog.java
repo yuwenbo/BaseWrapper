@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import usage.ywb.personal.widgets.R;
+import usage.ywb.wrapper.widgets.R;
 
 /**
  * @author ywb

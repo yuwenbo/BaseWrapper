@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import usage.ywb.personal.widgets.R;
+import usage.ywb.wrapper.widgets.R;
 import usage.ywb.wrapper.container.recycleview.RecycleViewDivider;
 
 

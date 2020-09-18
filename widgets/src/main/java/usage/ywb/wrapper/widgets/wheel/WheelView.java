@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import java.util.LinkedList;
 import java.util.List;
 
-import usage.ywb.personal.widgets.R;
+import usage.ywb.wrapper.widgets.R;
 import usage.ywb.wrapper.widgets.wheel.adapter.WheelViewAdapter;
 
 /**

@@ -7,126 +7,62 @@
 // ============================================================================
 package usage.ywb.wrapper.audio.entity;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * @author frank.yu
  *
  * DATE:2015.05.25
  */
-public class AudioEntity implements Serializable{
+public class AudioEntity implements Parcelable {
 
-    private String id;
-    private String name;
-    private String data;
-    private String album;
-    private String artist;
-    private long size;
-    private long time;
+    public String id;
+    public String name;
+    public String data;
+    public String album;
+    public String artist;
+    public long size;
+    public long time;
 
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(final String id) {
-        this.id = id;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.data);
+        dest.writeString(this.album);
+        dest.writeString(this.artist);
+        dest.writeLong(this.size);
+        dest.writeLong(this.time);
     }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
+    public AudioEntity() {
     }
 
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(final String name) {
-        this.name = name;
+    protected AudioEntity(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.data = in.readString();
+        this.album = in.readString();
+        this.artist = in.readString();
+        this.size = in.readLong();
+        this.time = in.readLong();
     }
 
-    /**
-     * @return the data
-     */
-    public String getData() {
-        return data;
-    }
+    public static final Parcelable.Creator<AudioEntity> CREATOR = new Parcelable.Creator<AudioEntity>() {
+        @Override
+        public AudioEntity createFromParcel(Parcel source) {
+            return new AudioEntity(source);
+        }
 
-    /**
-     * @param data
-     *            the data to set
-     */
-    public void setData(final String data) {
-        this.data = data;
-    }
-
-    /**
-     * @return the album
-     */
-    public String getAlbum() {
-        return album;
-    }
-
-    /**
-     * @param album
-     *            the album to set
-     */
-    public void setAlbum(final String album) {
-        this.album = album;
-    }
-
-    /**
-     * @return the artist
-     */
-    public String getArtist() {
-        return artist;
-    }
-
-    /**
-     * @param artist
-     *            the artist to set
-     */
-    public void setArtist(final String artist) {
-        this.artist = artist;
-    }
-
-    /**
-     * @return the size
-     */
-    public long getSize() {
-        return size;
-    }
-
-    /**
-     * @param size
-     *            the size to set
-     */
-    public void setSize(final long size) {
-        this.size = size;
-    }
-
-    /**
-     * @return the time
-     */
-    public long getTime() {
-        return time;
-    }
-
-    /**
-     * @param time
-     *            the time to set
-     */
-    public void setTime(final long time) {
-        this.time = time;
-    }
-
+        @Override
+        public AudioEntity[] newArray(int size) {
+            return new AudioEntity[size];
+        }
+    };
 }

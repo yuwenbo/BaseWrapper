@@ -42,7 +42,7 @@ public class AudioData {
 
     /**
      * 获取列表
-     * 
+     *
      * @return
      */
     public static List<AudioEntity> getAudiosList() {
@@ -51,7 +51,7 @@ public class AudioData {
 
     /**
      * 获取游标
-     * 
+     *
      * @param context
      * @return
      */
@@ -69,7 +69,7 @@ public class AudioData {
 
     /**
      * 初始化音频文件列表
-     * 
+     *
      * @param context
      * @return
      */
@@ -87,13 +87,13 @@ public class AudioData {
             AudioEntity music;
             while (cursor.moveToNext()) {
                 music = new AudioEntity();
-                music.setId(cursor.getString(indexId));
-                music.setData(cursor.getString(indexData));
-                music.setName(cursor.getString(indexName));
-                music.setSize(cursor.getLong(indexSize));
-                music.setTime(cursor.getLong(indexTime));
-                music.setAlbum(cursor.getString(indexAlbum));
-                music.setArtist(cursor.getString(indexArtist));
+                music.id = cursor.getString(indexId);
+                music.data = cursor.getString(indexData);
+                music.name = cursor.getString(indexName);
+                music.size = cursor.getLong(indexSize);
+                music.time = cursor.getLong(indexTime);
+                music.album = cursor.getString(indexAlbum);
+                music.artist = cursor.getString(indexArtist);
                 list.add(music);
             }
             cursor.close();

@@ -5,7 +5,7 @@ android {
     buildToolsVersion '30.0.2'
 
     defaultConfig {
-        applicationId "usage.ywb.personal.audio"
+        applicationId "usage.ywb.wrapper.audio"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1

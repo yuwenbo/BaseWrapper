@@ -65,8 +65,8 @@ public class AudioListAdapter extends RecyclerView.Adapter<AudioListAdapter.Audi
             arg0.icon.setImageResource(R.drawable.actionbar_music_selected);
             arg0.itemView.setBackgroundColor(0x00000000);
         }
-        arg0.name.setText(music.getName());
-        arg0.artist.setText(music.getArtist());
+        arg0.name.setText(music.name);
+        arg0.artist.setText(music.artist);
         arg0.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {

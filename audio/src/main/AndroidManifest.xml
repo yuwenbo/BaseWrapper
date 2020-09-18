@@ -30,7 +30,11 @@
             </intent-filter>
         </activity>
 
-        <service android:name="usage.ywb.wrapper.audio.service.AudioService">
+        <service
+            android:name="usage.ywb.wrapper.audio.service.AudioService"
+            android:enabled="true"
+            android:exported="true"
+            android:process="usage.ywb.wrapper.audio.AudioService">
             <intent-filter>
                 <action android:name="name.ywb.music.MUSIC_SERVICE" />
             </intent-filter>

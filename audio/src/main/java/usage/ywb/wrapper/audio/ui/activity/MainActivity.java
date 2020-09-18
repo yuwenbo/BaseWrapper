@@ -41,11 +41,10 @@ import usage.ywb.wrapper.audio.entity.AudioEntity;
 import usage.ywb.wrapper.audio.ui.adapter.AudioPagerAdapter;
 import usage.ywb.wrapper.audio.ui.fragment.AudiosListFragment;
 import usage.ywb.wrapper.audio.utils.Constants;
-import usage.ywb.wrapper.audio.utils.StatusBar;
-import usage.ywb.wrapper.audio.view.MarqueeTextView;
+import usage.ywb.wrapper.audio.ui.view.MarqueeTextView;
 import usage.ywb.wrapper.audio.service.AudioService;
 
-import usage.ywb.wrapper.audio.dao.AudioData;
+import usage.ywb.wrapper.audio.utils.AudioData;
 
 /**
  * @author frank.yu
@@ -141,13 +140,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBar.setStatusColor(this, getResources().getColor(R.color.custom));
-
         Log.i("MainActivity", getApplicationInfo().processName);
-
         initView();
         initViewPager();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {

@@ -6,7 +6,7 @@
 // CNT.5.0.1 : 2015-XX-XX, frank.yu, creation
 // ============================================================================
 
-package usage.ywb.wrapper.audio.dao;
+package usage.ywb.wrapper.audio.utils;
 
 import java.util.ArrayList;
 import java.util.List;

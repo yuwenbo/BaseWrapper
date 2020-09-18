@@ -60,6 +60,7 @@ public class AudioService extends Service implements OnCompletionListener {
 
     @Override
     public IBinder onBind(final Intent intent) {
+//        return new AudioBinder(this).asBinder();
         return new AudioBinder();
     }
 

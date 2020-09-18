@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import usage.ywb.wrapper.audio.R;
 import usage.ywb.wrapper.audio.entity.AudioEntity;
@@ -16,7 +19,7 @@ import java.util.List;
 /**
  * @author frank.yu DATE:2015.05.25
  */
-public class AudioListAdapter extends RecyclerView.Adapter<AudioViewHolder> {
+public class AudioListAdapter extends RecyclerView.Adapter<AudioListAdapter.AudioViewHolder> {
 
     private OnItemClickListener onItemClickListener;
     private List<AudioEntity> musicList;
@@ -80,6 +83,27 @@ public class AudioListAdapter extends RecyclerView.Adapter<AudioViewHolder> {
         final LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(layoutParams);
         return new AudioViewHolder(view);
+    }
+
+
+    public static class AudioViewHolder extends RecyclerView.ViewHolder {
+
+        public final ImageView icon;
+        public final TextView name;
+        public final TextView artist;
+        public final ImageButton more;
+
+        /**
+         * @param itemView
+         */
+        public AudioViewHolder(final View itemView) {
+            super(itemView);
+            icon = (ImageView) itemView.findViewById(R.id.music_icon);
+            name = (TextView) itemView.findViewById(R.id.music_name);
+            artist = (TextView) itemView.findViewById(R.id.music_artist);
+            more = (ImageButton) itemView.findViewById(R.id.music_more);
+        }
+
     }
 
     public interface OnItemClickListener {

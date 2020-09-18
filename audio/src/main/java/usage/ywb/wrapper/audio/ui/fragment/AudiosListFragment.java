@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import usage.ywb.wrapper.audio.R;
 import usage.ywb.wrapper.audio.ui.activity.MainActivity;
 import usage.ywb.wrapper.audio.entity.AudioEntity;
-import usage.ywb.wrapper.audio.dao.AudioData;
+import usage.ywb.wrapper.audio.utils.AudioData;
 import usage.ywb.wrapper.audio.ui.adapter.AudioListAdapter;
 
 import java.util.List;

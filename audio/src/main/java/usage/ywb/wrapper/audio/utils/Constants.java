@@ -9,7 +9,7 @@ public class Constants {
 
     public static final String SHARE_MUSIC = "ywb_audio_player";
 
-    public static final String MUSIC_SERVICE = "usage.ywb.personal.audio.AUDIO_SERVICE";
+    public static final String MUSIC_SERVICE = "usage.ywb.wrapper.audio.AUDIO_SERVICE";
 
     /**
      * 列表循环

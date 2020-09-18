@@ -1,4 +1,4 @@
-package usage.ywb.wrapper.audio.view;
+package usage.ywb.wrapper.audio.ui.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -45,7 +45,7 @@ public abstract class BaseExcelTableAdapter<LD, TD, RD, LH extends RecyclerView.
     /**
      * 右侧一个单元格（Cell）的高度
      */
-    protected int itemHeight;
+    private int itemHeight;
 
     /**
      * Excel竖直方向已滑动的距离

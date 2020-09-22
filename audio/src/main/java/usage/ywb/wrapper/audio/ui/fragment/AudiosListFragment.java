@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class AudiosListFragment extends Fragment implements AudioListAdapter.OnItemClickListener {
 
-
     /**
      * 列表控件
      */
@@ -69,7 +68,6 @@ public class AudiosListFragment extends Fragment implements AudioListAdapter.OnI
         }
     }
 
-
     /**
      * 将指定的item移动到RecycleView的指定位置
      *
@@ -89,21 +87,15 @@ public class AudiosListFragment extends Fragment implements AudioListAdapter.OnI
         }
     }
 
-    public void notifyDataSetChanged() {
-        adapter.notifyDataSetChanged();
-    }
-
     @Override
     public void onItemClick(View convertView, int position) {
         ((MainActivity) getActivity()).setPosition(position);
         ((MainActivity) getActivity()).play();
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
-
 
 }

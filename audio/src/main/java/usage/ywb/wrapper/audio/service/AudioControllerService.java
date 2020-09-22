@@ -11,7 +11,7 @@ import android.util.Log;
  *
  * DATE:2015.05.28
  */
-public class AudioService extends Service {
+public class AudioControllerService extends Service {
 
 
     @Override
@@ -22,7 +22,7 @@ public class AudioService extends Service {
 
     @Override
     public IBinder onBind(final Intent intent) {
-        return new AudioBinder(this).asBinder();
+        return new AudioController(this).asBinder();
     }
 
 

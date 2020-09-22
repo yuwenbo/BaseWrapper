@@ -44,16 +44,16 @@ public class VisualizerView extends View {
     protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
         if (waveform == null) {
+            points = new float[waveform.length * 4];
             return;
         }
-        points = new float[waveform.length * 4];
-        int width = canvas.getWidth();
-        int height = canvas.getHeight();
+        int width = getWidth();
+        int height = getHeight();
         for (int i = 0; i < COUNT; i++) {
             if (waveform[i] < 0) {
                 waveform[i] = 127;
             }
-            points[i * 4 + 0] = width / COUNT * i + width / 45;
+            points[i * 4] = width / COUNT * i + width / 45;
             points[i * 4 + 1] = waveform[i] * height / 127 - 2;
             points[i * 4 + 2] = width / COUNT * i + width / 45;
             points[i * 4 + 3] = height;

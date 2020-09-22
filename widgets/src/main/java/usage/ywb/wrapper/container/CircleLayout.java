@@ -299,14 +299,15 @@ public class CircleLayout extends ViewGroup {
         //手指触电相对于控件中心点的位置
         double x = xTouch - (layoutWidth / 2d);
         double y = yTouch - (layoutHeight / 2d);
+        double v = Math.toDegrees(Math.asin(y / Math.hypot(x, y)));
         switch (getQuadrant(x, y)) {
             case 1:
-                return Math.toDegrees(Math.asin(y / Math.hypot(x, y)));
+                return v;
             case 2:
             case 3:
-                return 180 - (Math.toDegrees(Math.asin(y / Math.hypot(x, y))));
+                return 180 - v;
             case 4:
-                return 360 + Math.toDegrees(Math.asin(y / Math.hypot(x, y)));
+                return 360 + v;
             default:
                 return 0;
         }

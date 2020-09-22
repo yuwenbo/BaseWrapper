@@ -1,11 +1,11 @@
-// IAudioInterface.aidl
+// IAudioController.aidl
 package usage.ywb.wrapper.audio;
 
 // Declare any non-default types here with import statements
 import usage.ywb.wrapper.audio.entity.AudioEntity;
 
 
-interface IAudioInterface {
+interface IAudioController {
 
     void setResource(in AudioEntity entity);
 

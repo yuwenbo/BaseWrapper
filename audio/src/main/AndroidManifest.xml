@@ -15,7 +15,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/music_icon"
+        android:icon="@drawable/ic_music_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
@@ -31,7 +31,7 @@
         </activity>
 
         <service
-            android:name="usage.ywb.wrapper.audio.service.AudioService"
+            android:name="usage.ywb.wrapper.audio.service.AudioControllerService"
             android:enabled="true"
             android:exported="true"
             android:process="usage.ywb.wrapper.audio.AudioService">

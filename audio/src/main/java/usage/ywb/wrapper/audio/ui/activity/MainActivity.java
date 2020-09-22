@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -31,12 +30,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import usage.ywb.wrapper.audio.IAudioInterface;
+import usage.ywb.wrapper.audio.IAudioController;
 import usage.ywb.wrapper.audio.R;
 import usage.ywb.wrapper.audio.entity.AudioEntity;
 import usage.ywb.wrapper.audio.ui.fragment.AudiosListFragment;
 import usage.ywb.wrapper.audio.ui.view.MarqueeTextView;
-import usage.ywb.wrapper.audio.service.AudioService;
+import usage.ywb.wrapper.audio.service.AudioControllerService;
 
 import usage.ywb.wrapper.audio.utils.AudioData;
 
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
      */
     private AudioEntity entity;
 
-    private IAudioInterface iAudio;
+    private IAudioController iAudio;
 
     private ServiceConnection serviceConnection;
 
@@ -136,11 +135,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         audiosList = AudioData.initAudiosList(this);
         getSupportFragmentManager().beginTransaction().add(R.id.music_viewpager, fragmentLists).commit();
         final Intent intent = new Intent();
-        intent.setClass(this, AudioService.class);
+        intent.setClass(this, AudioControllerService.class);
         serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(final ComponentName name, final IBinder service) {
-                iAudio = IAudioInterface.Stub.asInterface(service);
+                iAudio = IAudioController.Stub.asInterface(service);
             }
 
             @Override
@@ -302,6 +301,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         if (timer != null) {
             timer.cancel();
             timer = null;
+        }
+        try {
+            if (iAudio != null && !iAudio.isPlaying()) {
+                iAudio.release();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
         unbindService(serviceConnection);
         super.onDestroy();

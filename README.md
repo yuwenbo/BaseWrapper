@@ -1,7 +1,7 @@
 # BaseWrapper
 一个基于MVP+Retrofit2+Gson+Butterknife+ARouter的组件化项目Demo
 
-模块划分规则
+<h3>模块划分规则:</h3>
 
 ## core
 系统核心组件，主要包括：网络请求、数据库、推送、地图、多媒体（相机、音视频）等等，不包含任何业务，不能依赖其他任何组件。可被除core以外的多有模块依赖。

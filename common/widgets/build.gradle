@@ -1,8 +1,4 @@
-//if (isDebug.toBoolean()) {
-    apply plugin: 'com.android.application'
-//} else {
-//    apply plugin: 'com.android.library'
-//}
+apply plugin: 'com.android.library'
 
 android {
 
@@ -10,7 +6,6 @@ android {
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        applicationId "usage.ywb.personal.camera"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -32,6 +27,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':b_base')
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["recyclerview"]
+
 }

@@ -25,7 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="@string/press_color_to_apply"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText

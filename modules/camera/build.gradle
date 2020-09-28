@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+//if (isDebug.toBoolean()) {
+    apply plugin: 'com.android.application'
+//} else {
+//    apply plugin: 'com.android.library'
+//}
 
 android {
 
@@ -6,7 +10,7 @@ android {
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        applicationId "usage.ywb.personal.video"
+        applicationId "usage.ywb.personal.camera"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -28,6 +32,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(path: ':b_base')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies["appcompat"]
+
 }

@@ -33,6 +33,30 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':c_mvp')
-    implementation project(path: ':b_base')
+    implementation project(path: ':common:mvp')
+    implementation project(path: ":common:widgets")
+
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["constraintlayout"]
+    implementation rootProject.ext.dependencies["support_annotations"]
+    implementation rootProject.ext.dependencies["multidex"]
+
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit_rxjava"]
+    implementation rootProject.ext.dependencies["retrofit_gson"]
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["okhttp_logging_interceptor"]
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxlifecycle"]
+    implementation rootProject.ext.dependencies["rxlifecycle_android"]
+    implementation rootProject.ext.dependencies["rxlifecycle_components"]
+
+    implementation rootProject.ext.dependencies["smartRefresh"]
+    implementation rootProject.ext.dependencies["smartRefresh_header"]
+
+    implementation rootProject.ext.dependencies["eventbus"]
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor  rootProject.ext.dependencies["butterknife_compiler"]
 }

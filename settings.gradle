@@ -1,2 +1,3 @@
-include ':app', ':mvp', ':widgets', ':camera', ':video', ':audio'
+include ':app', ':c_mvp', ':c_widgets', ':cm_camera', ':m_video', ':cm_audio'
 rootProject.name='BaseWrapper'
+include ':b_base'

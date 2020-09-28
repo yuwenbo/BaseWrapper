@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="usage.ywb.wrapper.audio">
+
+
+    <!-- 读取存储卡的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 允许程序重新启动其他程序 -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <!-- 存储卡写入的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 允许程序录制音频 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_music_logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="unspecified"
+            android:theme="@style/MusicTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.AudioControllerService"
+            android:enabled="true"
+            android:exported="true"
+            android:process="usage.ywb.wrapper.audio.AudioService">
+            <intent-filter>
+                <action android:name="name.ywb.music.MUSIC_SERVICE" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

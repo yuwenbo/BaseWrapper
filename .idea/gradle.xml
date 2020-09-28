@@ -11,11 +11,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/audio" />
-            <option value="$PROJECT_DIR$/camera" />
-            <option value="$PROJECT_DIR$/mvp" />
-            <option value="$PROJECT_DIR$/video" />
-            <option value="$PROJECT_DIR$/widgets" />
+            <option value="$PROJECT_DIR$/b_base" />
+            <option value="$PROJECT_DIR$/c_mvp" />
+            <option value="$PROJECT_DIR$/c_widgets" />
+            <option value="$PROJECT_DIR$/cm_audio" />
+            <option value="$PROJECT_DIR$/cm_camera" />
+            <option value="$PROJECT_DIR$/m_video" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

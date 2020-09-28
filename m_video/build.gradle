@@ -6,33 +6,28 @@ android {
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        applicationId rootProject.ext.android["applicationId"]
+        applicationId "usage.ywb.personal.video"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    // 指定jdk版本为1.8 或以上
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            buildConfigField "boolean", "LOG_OPEN", "false"
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug{
-            buildConfigField "boolean", "LOG_OPEN", "true"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
-    implementation project(path: ':c_mvp')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(path: ':b_base')
 }

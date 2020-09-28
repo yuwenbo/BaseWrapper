@@ -41,7 +41,6 @@ public class MainActivity extends BaseWrapperActivity {
                 startActivity(new Intent(MainActivity.this, clazz));
             }
         };
-//        startActivity(new Intent(this, MainActivity.class));
 
         findViewById(R.id.load).setOnClickListener(v -> {
             File file = copyToCache("CircleLayout");

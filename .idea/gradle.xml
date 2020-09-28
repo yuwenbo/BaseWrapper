@@ -16,6 +16,8 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/audio" />
             <option value="$PROJECT_DIR$/core/camera" />
+            <option value="$PROJECT_DIR$/core/net" />
+            <option value="$PROJECT_DIR$/core/sqlite" />
             <option value="$PROJECT_DIR$/core/video" />
           </set>
         </option>

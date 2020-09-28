@@ -1,13 +1,13 @@
 # BaseWrapper
 一个基于MVP+Retrofit2+Gson+Butterknife+ARouter的组件化项目Demo
 
-模块命名规则
-base，最基础的组件，所有的模块都可以依赖这个模块，主要用以工程、全局的资源文件（color/style/shape等），不能依赖其他模块。
+模块划分规则
+core，系统核心组件，主要包括：网络请求、数据库、推送、地图、多媒体（相机、音视频）等等，不包含任何业务，不能依赖其他任何组件。可被除core以外的多有模块依赖。
 
-common，通用组件，一些不包含业务的基础封装，如自定义View，第三方SDK的二次封装（网络请求、数据库、推送、地图等等），项目架构封装。只能添加对base模块的依赖。
+base，基础封装组件，主要包括：通用的资源文件（color/style/shape等），项目架构封装，一些第三方SDK的二次封装，自定义View，各种Utils类等。只能被common/module依赖。
 
-commonModule，业务公用组件，公共的业务模块，可独立成一个业务模块，也可供其他组件调用。只能添加对base和common模块的依赖。module之间应尽量避免互相依赖。
+common，业务通用组件，公共的业务模块，可供其他业务模块调用。可添加对core/base模块的依赖，只能被module依赖。common之间应避免相互依赖。
 
-module，业务模块，项目的主要业务按模块划分，只能建立对base、common、commonModule的依赖，module互相之间不能有任何依赖关系，应做到绝对解耦。
+module，业务模块，项目的主要业务按模块，可建立对core、base、common的依赖，module互相之间不能有任何依赖关系，应做到绝对解耦，满足独立编译/运行/打包的条件。
 
-
+app，最上层的应用模块，主工程项目统一入口。

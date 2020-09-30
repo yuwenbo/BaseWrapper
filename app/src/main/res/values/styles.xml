@@ -8,22 +8,5 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="title_layout">
-        <item name="android:id">@id/title_layout</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">@dimen/title_height</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:background">@color/colorAccent</item>
-    </style>
-
-    <style name="search_layout">
-        <item name="android:id">@id/search_layout</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">@dimen/title_height</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:background">@color/colorAccent</item>
-    </style>
 
 </resources>

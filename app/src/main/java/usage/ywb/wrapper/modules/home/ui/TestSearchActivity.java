@@ -5,14 +5,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 
 import usage.ywb.wrapper.R;
-import usage.ywb.wrapper.base.activity.BaseSearchActivity;
-import usage.ywb.wrapper.commom.widgets.SearchLayout;
+import usage.ywb.wrapper.mvp.ui.base.activity.BaseSearchActivity;
+import usage.ywb.wrapper.mvp.widgets.SearchLayout;
 
 /**
  * @author yuwenbo

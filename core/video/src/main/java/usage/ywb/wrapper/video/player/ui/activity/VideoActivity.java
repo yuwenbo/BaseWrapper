@@ -295,59 +295,52 @@ public class VideoActivity extends AppCompatActivity implements OnTouchListener,
     @Override
     public void onClick(final View v) {
         panelShowingTime = 0;
-        switch (v.getId()) {
-            case R.id.video_lock:
-                if (isLock) {
-                    videoLock.setImageResource(R.drawable.ic_action_open);
-                    setPanelVisible();
-                    isLock = false;
-                } else {
-                    videoLock.setImageResource(R.drawable.ic_action_lock);
-                    setPanelGone();
-                    isLock = true;
-                }
-                break;
-            case R.id.video_cancal:
-                videoView.stopPlayback();
-                finish();
-                if (timer != null) {
-                    timer.cancel();
-                    timer = null;
-                }
-                break;
-            case R.id.video_forward:
-                Log.i("VideoActivity", "onClick-----------video_forward");
-                if (videoIndex == 0) {
-                    Toast.makeText(this, "已经是第一条了", Toast.LENGTH_SHORT).show();
-                } else {
-                    reset();
-                    videoIndex--;
-                    initData();
-                }
-                break;
-            case R.id.video_play:
-                if (isPlaying) {
-                    videoView.pause();
-                    isPlaying = false;
-                    videoPlay.setImageResource(R.drawable.ic_action_play);
-                } else {
-                    videoView.start();
-                    isPlaying = true;
-                    videoPlay.setImageResource(R.drawable.ic_action_stop);
-                }
-                break;
-            case R.id.video_next:
-                Log.i("VideoActivity", "onClick-------------video_next");
-                if (videoIndex == VideoData.getLocalVideosList(this).size() - 1) {
-                    Toast.makeText(this, "已经是最后一条了", Toast.LENGTH_SHORT).show();
-                } else {
-                    reset();
-                    videoIndex++;
-                    initData();
-                }
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.video_lock) {
+            if (isLock) {
+                videoLock.setImageResource(R.drawable.ic_action_open);
+                setPanelVisible();
+                isLock = false;
+            } else {
+                videoLock.setImageResource(R.drawable.ic_action_lock);
+                setPanelGone();
+                isLock = true;
+            }
+        } else if (id == R.id.video_cancal) {
+            videoView.stopPlayback();
+            finish();
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+        } else if (id == R.id.video_forward) {
+            Log.i("VideoActivity", "onClick-----------video_forward");
+            if (videoIndex == 0) {
+                Toast.makeText(this, "已经是第一条了", Toast.LENGTH_SHORT).show();
+            } else {
+                reset();
+                videoIndex--;
+                initData();
+            }
+        } else if (id == R.id.video_play) {
+            if (isPlaying) {
+                videoView.pause();
+                isPlaying = false;
+                videoPlay.setImageResource(R.drawable.ic_action_play);
+            } else {
+                videoView.start();
+                isPlaying = true;
+                videoPlay.setImageResource(R.drawable.ic_action_stop);
+            }
+        } else if (id == R.id.video_next) {
+            Log.i("VideoActivity", "onClick-------------video_next");
+            if (videoIndex == VideoData.getLocalVideosList(this).size() - 1) {
+                Toast.makeText(this, "已经是最后一条了", Toast.LENGTH_SHORT).show();
+            } else {
+                reset();
+                videoIndex++;
+                initData();
+            }
         }
     }
 
@@ -406,19 +399,15 @@ public class VideoActivity extends AppCompatActivity implements OnTouchListener,
     @Override
     public boolean onLongClick(final View v) {
         panelShowingTime = 0;
-        switch (v.getId()) {
-            case R.id.video_forward:
-                Log.i("VideoActivity", "onLongClick----------video_next");
-                isFast = true;
-                fastForward(v);
-                break;
-            case R.id.video_next:
-                Log.i("VideoActivity", "onLongClick----------video_next");
-                isFast = true;
-                fastNext(v);
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.video_forward) {
+            Log.i("VideoActivity", "onLongClick----------video_next");
+            isFast = true;
+            fastForward(v);
+        } else if (id == R.id.video_next) {
+            Log.i("VideoActivity", "onLongClick----------video_next");
+            isFast = true;
+            fastNext(v);
         }
         return true;
     }

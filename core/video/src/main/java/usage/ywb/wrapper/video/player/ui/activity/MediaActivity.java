@@ -275,59 +275,52 @@ public class MediaActivity extends AppCompatActivity implements View.OnTouchList
     @Override
     public void onClick(final View v) {
         showTime = 0;
-        switch (v.getId()) {
-            case R.id.video_lock:
-                if (isLock) {
-                    videoLock.setImageResource(R.drawable.ic_action_open);
-                    setPanelVisible();
-                    isLock = false;
-                } else {
-                    videoLock.setImageResource(R.drawable.ic_action_lock);
-                    setPanelGone();
-                    isLock = true;
-                }
-                break;
-            case R.id.video_cancal:
-                mediaPlayer.stop();
-                finish();
-                if (timer != null) {
-                    timer.cancel();
-                    timer = null;
-                }
-                break;
-            case R.id.video_forward:
-                if (videoIndex == 0) {
-                    Toast.makeText(this, "已经是第一条了", Toast.LENGTH_SHORT).show();
-                } else {
-                    mediaPlayer.pause();
-                    progress = 0;
-                    videoIndex--;
-                    initData();
-                }
-                break;
-            case R.id.video_play:
-                if (isPlaying) {
-                    mediaPlayer.pause();
-                    isPlaying = false;
-                    videoPlay.setImageResource(R.drawable.ic_action_play);
-                } else {
-                    mediaPlayer.start();
-                    isPlaying = true;
-                    videoPlay.setImageResource(R.drawable.ic_action_stop);
-                }
-                break;
-            case R.id.video_next:
-                if (videoIndex == VideoData.getLocalVideosList(this).size() - 1) {
-                    Toast.makeText(this, "已经是最后一条了", Toast.LENGTH_SHORT).show();
-                } else {
-                    mediaPlayer.pause();
-                    progress = 0;
-                    videoIndex++;
-                    initData();
-                }
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.video_lock) {
+            if (isLock) {
+                videoLock.setImageResource(R.drawable.ic_action_open);
+                setPanelVisible();
+                isLock = false;
+            } else {
+                videoLock.setImageResource(R.drawable.ic_action_lock);
+                setPanelGone();
+                isLock = true;
+            }
+        } else if (id == R.id.video_cancal) {
+            mediaPlayer.stop();
+            finish();
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+        } else if (id == R.id.video_forward) {
+            if (videoIndex == 0) {
+                Toast.makeText(this, "已经是第一条了", Toast.LENGTH_SHORT).show();
+            } else {
+                mediaPlayer.pause();
+                progress = 0;
+                videoIndex--;
+                initData();
+            }
+        } else if (id == R.id.video_play) {
+            if (isPlaying) {
+                mediaPlayer.pause();
+                isPlaying = false;
+                videoPlay.setImageResource(R.drawable.ic_action_play);
+            } else {
+                mediaPlayer.start();
+                isPlaying = true;
+                videoPlay.setImageResource(R.drawable.ic_action_stop);
+            }
+        } else if (id == R.id.video_next) {
+            if (videoIndex == VideoData.getLocalVideosList(this).size() - 1) {
+                Toast.makeText(this, "已经是最后一条了", Toast.LENGTH_SHORT).show();
+            } else {
+                mediaPlayer.pause();
+                progress = 0;
+                videoIndex++;
+                initData();
+            }
         }
     }
 
@@ -356,47 +349,43 @@ public class MediaActivity extends AppCompatActivity implements View.OnTouchList
 
     @Override
     public boolean onLongClick(final View v) {
-        switch (v.getId()) {
-            case R.id.video_forward:
-                final Timer timer1 = new Timer();
-                final TimerTask task1 = new TimerTask() {
-                    int schedule = 1000;
+        int id = v.getId();
+        if (id == R.id.video_forward) {
+            final Timer timer1 = new Timer();
+            final TimerTask task1 = new TimerTask() {
+                int schedule = 1000;
 
-                    @Override
-                    public void run() {
-                        progress -= schedule;
-                        schedule += 1000;
-                        if (progress < 0 || !v.isPressed()) {
-                            timer1.cancel();
-                        } else {
-                            mHandler.sendEmptyMessage(progress);
-                            mediaPlayer.seekTo(progress);
-                        }
+                @Override
+                public void run() {
+                    progress -= schedule;
+                    schedule += 1000;
+                    if (progress < 0 || !v.isPressed()) {
+                        timer1.cancel();
+                    } else {
+                        mHandler.sendEmptyMessage(progress);
+                        mediaPlayer.seekTo(progress);
                     }
-                };
-                timer1.schedule(task1, 0, 300);
-                break;
-            case R.id.video_next:
-                final Timer timer2 = new Timer();
-                final TimerTask task2 = new TimerTask() {
-                    int schedule = 1000;
+                }
+            };
+            timer1.schedule(task1, 0, 300);
+        } else if (id == R.id.video_next) {
+            final Timer timer2 = new Timer();
+            final TimerTask task2 = new TimerTask() {
+                int schedule = 1000;
 
-                    @Override
-                    public void run() {
-                        progress += schedule;
-                        schedule += 1000;
-                        if (progress > videoEntity.getTime() || !v.isPressed()) {
-                            timer2.cancel();
-                        } else {
-                            mHandler.sendEmptyMessage(progress);
-                            mediaPlayer.seekTo(progress);
-                        }
+                @Override
+                public void run() {
+                    progress += schedule;
+                    schedule += 1000;
+                    if (progress > videoEntity.getTime() || !v.isPressed()) {
+                        timer2.cancel();
+                    } else {
+                        mHandler.sendEmptyMessage(progress);
+                        mediaPlayer.seekTo(progress);
                     }
-                };
-                timer2.schedule(task2, 0, 300);
-                break;
-            default:
-                break;
+                }
+            };
+            timer2.schedule(task2, 0, 300);
         }
         return false;
     }

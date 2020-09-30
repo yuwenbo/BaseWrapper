@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import dalvik.system.DexClassLoader;
 import usage.ywb.wrapper.R;
-import usage.ywb.wrapper.base.activity.BaseWrapperActivity;
+import usage.ywb.wrapper.mvp.ui.base.activity.BaseWrapperActivity;
 
 /**
  * @author yuwenbo

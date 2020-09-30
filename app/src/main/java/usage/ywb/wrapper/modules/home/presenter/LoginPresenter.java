@@ -1,14 +1,14 @@
 package usage.ywb.wrapper.modules.home.presenter;
 
 
-import usage.ywb.wrapper.commom.nets.ConvertObserver;
-import usage.ywb.wrapper.commom.nets.DefaultObserver;
-import usage.ywb.wrapper.commom.utils.GlobalCache;
+import usage.ywb.wrapper.common.GlobalCache;
 import usage.ywb.wrapper.modules.home.contract.LoginContract;
 import usage.ywb.wrapper.modules.home.entity.Domain;
 import usage.ywb.wrapper.modules.home.entity.Login;
 import usage.ywb.wrapper.modules.home.entity.User;
 import usage.ywb.wrapper.modules.home.model.LoginModel;
+import usage.ywb.wrapper.mvp.net.ConvertObserver;
+import usage.ywb.wrapper.mvp.net.DefaultObserver;
 import usage.ywb.wrapper.mvp.presenter.BasePresenter;
 
 /**

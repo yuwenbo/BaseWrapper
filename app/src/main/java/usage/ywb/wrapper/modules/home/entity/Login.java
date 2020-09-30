@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import usage.ywb.wrapper.base.entity.ConvertEntity;
+import usage.ywb.wrapper.mvp.ui.base.entity.ConvertEntity;
 
 /**
  * @author yuwenbo

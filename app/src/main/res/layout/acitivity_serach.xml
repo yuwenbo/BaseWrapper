@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <usage.ywb.wrapper.commom.widgets.SearchLayout style="@style/search_layout" />
+    <usage.ywb.wrapper.mvp.widgets.SearchLayout style="@style/search_layout" />
 
     <FrameLayout
         android:layout_width="match_parent"

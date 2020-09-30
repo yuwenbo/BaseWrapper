@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <usage.ywb.wrapper.commom.widgets.TitleLayout style="@style/title_layout" />
+    <usage.ywb.wrapper.mvp.widgets.TitleLayout style="@style/title_layout" />
 
     <EditText
         android:id="@+id/login_username_et"

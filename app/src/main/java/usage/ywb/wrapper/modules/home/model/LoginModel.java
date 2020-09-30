@@ -1,17 +1,17 @@
 package usage.ywb.wrapper.modules.home.model;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 import usage.ywb.wrapper.api.ILoginApi;
-import usage.ywb.wrapper.commom.nets.ConvertObserver;
-import usage.ywb.wrapper.commom.nets.DefaultObserver;
-import usage.ywb.wrapper.commom.nets.OkHttpManager;
-import usage.ywb.wrapper.commom.nets.Key;
+import usage.ywb.wrapper.common.Key;
 import usage.ywb.wrapper.modules.home.contract.LoginContract;
 import usage.ywb.wrapper.modules.home.entity.Domain;
 import usage.ywb.wrapper.modules.home.entity.Login;
 import usage.ywb.wrapper.modules.home.entity.User;
 import usage.ywb.wrapper.mvp.model.BaseModel;
+import usage.ywb.wrapper.mvp.net.ConvertObserver;
+import usage.ywb.wrapper.net.OkHttpManager;
 
 
 /**

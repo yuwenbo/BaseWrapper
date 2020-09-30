@@ -260,7 +260,7 @@ public class PinnedHeaderExpandableListView2 extends ExpandableListView implemen
                 mHeaderView.layout(0, -delta, mHeaderWidth, mHeaderHeight - delta);
             } else {
                 //TODO : note it, when cause bug, remove it
-//                mHeaderView.layout(0, 0, mHeaderWidth, mHeaderHeight);
+//                mHeaderView.main_layout(0, 0, mHeaderWidth, mHeaderHeight);
             }
         } else {
             mHeaderView.layout(0, 0, mHeaderWidth, mHeaderHeight);

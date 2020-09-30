@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.SystemClock;
 import android.util.Log;
 
-import usage.ywb.wrapper.base.activity.HookStartActivityUtil;
-import usage.ywb.wrapper.base.activity.ProxyActivity;
+import usage.ywb.wrapper.mvp.ui.base.activity.HookStartActivityUtil;
+import usage.ywb.wrapper.mvp.ui.base.activity.ProxyActivity;
 
 /**
  * @author yuwenbo

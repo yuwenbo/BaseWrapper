@@ -1,11 +1,11 @@
 package usage.ywb.wrapper.modules.home.contract;
 
-import usage.ywb.wrapper.commom.nets.ConvertObserver;
-import usage.ywb.wrapper.commom.nets.DefaultObserver;
+import io.reactivex.observers.DefaultObserver;
 import usage.ywb.wrapper.modules.home.entity.Domain;
 import usage.ywb.wrapper.modules.home.entity.Login;
 import usage.ywb.wrapper.modules.home.entity.User;
 import usage.ywb.wrapper.mvp.ui.IBaseView;
+import usage.ywb.wrapper.mvp.net.ConvertObserver;
 
 /**
  * 登录的 MVP “代理” 类

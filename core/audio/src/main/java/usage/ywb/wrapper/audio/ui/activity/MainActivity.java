@@ -1,7 +1,6 @@
 package usage.ywb.wrapper.audio.ui.activity;
 
 import java.util.List;
-import java.util.Timer;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.audio_activity_main);
         Log.i("MainActivity", getApplicationInfo().processName);
         initView();
         fragmentLists = new AudiosListFragment();
@@ -201,34 +200,28 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     @Override
     public void onClick(final View v) {
-        switch (v.getId()) {
-            case R.id.iv_music_forward:
-                toForwardMusic();
-                break;
-            case R.id.iv_music_pause:
-                if (position == -1) {
-                    position = 0;
+        int id = v.getId();
+        if (id == R.id.iv_music_forward) {
+            toForwardMusic();
+        } else if (id == R.id.iv_music_pause) {
+            if (position == -1) {
+                position = 0;
+            }
+            try {
+                if (iAudio.isPlaying()) {
+                    stop();
+                } else {
+                    play();
                 }
-                try {
-                    if (iAudio.isPlaying()) {
-                        stop();
-                    } else {
-                        play();
-                    }
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.iv_music_next:
-                toNextMusic();
-                break;
-            case R.id.music_playing_name:
-                if (position != -1) {
-                    fragmentLists.setCurrPosition(position);
-                }
-                break;
-            default:
-                break;
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        } else if (id == R.id.iv_music_next) {
+            toNextMusic();
+        } else if (id == R.id.music_playing_name) {
+            if (position != -1) {
+                fragmentLists.setCurrPosition(position);
+            }
         }
     }
 

@@ -638,7 +638,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
     }
 
     /**
-     * Set view dimensions based on layout params
+     * Set view dimensions based on main_layout params
      *
      * @param mode
      * @param size

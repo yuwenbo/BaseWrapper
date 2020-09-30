@@ -27,13 +27,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Intent intent = null;
-        switch (v.getId()) {
-            case R.id.list_btn:
-                intent = new Intent(this, VideoListActivity.class);
-                break;
-            case R.id.record_btn:
-                intent = new Intent(this, RecordActivity.class);
-                break;
+        int id = v.getId();
+        if (id == R.id.list_btn) {
+            intent = new Intent(this, VideoListActivity.class);
+        } else if (id == R.id.record_btn) {
+            intent = new Intent(this, RecordActivity.class);
         }
         if (intent != null) {
             startActivity(intent);

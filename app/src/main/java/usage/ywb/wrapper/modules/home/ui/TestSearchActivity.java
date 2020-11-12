@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import usage.ywb.wrapper.R;
-import usage.ywb.wrapper.mvp.ui.base.activity.BaseSearchActivity;
+import usage.ywb.wrapper.mvp.common.activity.BaseSearchActivity;
 import usage.ywb.wrapper.mvp.widgets.SearchLayout;
 
 /**

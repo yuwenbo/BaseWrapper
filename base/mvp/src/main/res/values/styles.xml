@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="full_screen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="title_layout">
         <item name="android:id">@id/title_layout</item>
         <item name="android:layout_width">match_parent</item>

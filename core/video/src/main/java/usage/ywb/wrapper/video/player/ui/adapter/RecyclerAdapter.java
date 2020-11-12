@@ -73,7 +73,7 @@ public class RecyclerAdapter extends Adapter<ViewHolder> implements OnClickListe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int arg1) {
-        final View itemView = inflater.inflate(R.layout.item_video, parent, false);
+        final View itemView = inflater.inflate(R.layout.video_item_video, parent, false);
         final LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         itemView.setLayoutParams(layoutParams);
         return new ViewHolder(itemView);

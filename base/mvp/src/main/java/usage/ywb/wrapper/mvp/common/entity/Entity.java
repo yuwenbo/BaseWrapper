@@ -1,4 +1,4 @@
-package usage.ywb.wrapper.mvp.ui.base.entity;
+package usage.ywb.wrapper.mvp.common.entity;
 
 import com.google.gson.annotations.SerializedName;
 

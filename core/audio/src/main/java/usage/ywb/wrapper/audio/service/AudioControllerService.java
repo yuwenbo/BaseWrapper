@@ -7,12 +7,13 @@ import android.util.Log;
 
 
 /**
- * @author frank.yu
+ * @author yuwenbo
  *
  * DATE:2015.05.28
  */
 public class AudioControllerService extends Service {
 
+    public static final String ACTION = "name.ywb.music.MUSIC_SERVICE";
 
     @Override
     public void onCreate() {

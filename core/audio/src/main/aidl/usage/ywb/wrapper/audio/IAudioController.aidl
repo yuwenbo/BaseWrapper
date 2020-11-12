@@ -13,11 +13,15 @@ interface IAudioController {
 
     void prepare();
 
-    void play();
+    void start();
+
+    void resume();
 
     boolean isPlaying();
 
     void seek(int progress) ;
+
+    void pause();
 
     void stop();
 

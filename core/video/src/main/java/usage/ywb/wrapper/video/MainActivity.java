@@ -8,17 +8,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 import usage.ywb.wrapper.video.player.ui.activity.VideoListActivity;
 import usage.ywb.wrapper.video.record.RecordActivity;
 
 
+@Route(path = "/video/MainActivity")
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.video_activity_main);
         findViewById(R.id.list_btn).setOnClickListener(this);
         findViewById(R.id.record_btn).setOnClickListener(this);
     }

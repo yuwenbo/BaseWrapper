@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 import usage.ywb.wrapper.camera.R;
 
+@Route(path = "/camera/MainActivity")
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.camare_activity_main);
         imageView = findViewById(R.id.imageView);
         findViewById(R.id.open_camera).setOnClickListener(new View.OnClickListener() {
             @Override

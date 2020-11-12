@@ -1,18 +1,18 @@
 package usage.ywb.wrapper;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.SystemClock;
 import android.util.Log;
 
-import usage.ywb.wrapper.mvp.ui.base.activity.HookStartActivityUtil;
-import usage.ywb.wrapper.mvp.ui.base.activity.ProxyActivity;
+import usage.ywb.wrapper.mvp.BaseApplication;
+import usage.ywb.wrapper.mvp.common.activity.HookStartActivityUtil;
+import usage.ywb.wrapper.mvp.common.activity.ProxyActivity;
 
 /**
  * @author yuwenbo
  * @version [ V.1.0.0  2020/05/13 ]
  */
-public class MyApp extends Application {
+public class MyApp extends BaseApplication {
 
     private static final String TAG = "MyApp";
 

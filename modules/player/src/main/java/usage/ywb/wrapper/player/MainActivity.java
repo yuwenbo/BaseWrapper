@@ -1,13 +1,14 @@
 package usage.ywb.wrapper.player;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 import butterknife.OnClick;
-import usage.ywb.wrapper.mvp.ui.base.activity.BaseWrapperActivity;
+import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity;
 
 /**
  * @author yuwenbo
@@ -24,8 +25,17 @@ public class MainActivity extends BaseWrapperActivity {
 
     @OnClick(R.id.audio_btn)
     protected void onClickAudio() {
-        Intent intent = new Intent(this, usage.ywb.wrapper.audio.ui.activity.MainActivity.class);
-        startActivity(intent);
+        ARouter.getInstance().build("/audio/MainActivity").navigation();
+    }
+
+    @OnClick(R.id.video_btn)
+    protected void onClickVideo() {
+        ARouter.getInstance().build("/video/MainActivity").navigation();
+    }
+
+    @OnClick(R.id.camera_btn)
+    protected void onClickCamera() {
+        ARouter.getInstance().build("/camera/MainActivity").navigation();
     }
 
 }

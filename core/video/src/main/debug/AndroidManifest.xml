@@ -12,11 +12,22 @@
 
     <application
         android:name="usage.ywb.wrapper.mvp.BaseApplication"
+        android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:hardwareAccelerated="true"
-        android:label="@string/app_name">
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-        <activity android:name="usage.ywb.wrapper.video.MainActivity" />
+        <activity android:name="usage.ywb.wrapper.video.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name="usage.ywb.wrapper.video.player.ui.activity.VideoActivity"

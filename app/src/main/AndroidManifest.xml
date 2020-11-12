@@ -29,7 +29,7 @@
 
         <activity android:name=".modules.home.ui.TestSearchActivity"/>
 
-        <activity android:name=".mvp.ui.base.activity.ProxyActivity" />
+        <activity android:name=".mvp.common.activity.ProxyActivity" />
 
     </application>
 

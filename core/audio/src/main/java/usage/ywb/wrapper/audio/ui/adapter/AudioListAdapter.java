@@ -79,7 +79,7 @@ public class AudioListAdapter extends RecyclerView.Adapter<AudioListAdapter.Audi
 
     @Override
     public AudioViewHolder onCreateViewHolder(final ViewGroup arg0, final int arg1) {
-        final View view = View.inflate(context, R.layout.adapter_audio_item, null);
+        final View view = View.inflate(context, R.layout.audio_adapter_item, null);
         final LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(layoutParams);
         return new AudioViewHolder(view);

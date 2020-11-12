@@ -1,6 +1,6 @@
 package usage.ywb.wrapper.mvp.net;
 
-import usage.ywb.wrapper.mvp.ui.base.entity.ConvertEntity;
+import usage.ywb.wrapper.mvp.common.entity.ConvertEntity;
 import usage.ywb.wrapper.mvp.ui.IBaseView;
 
 /**

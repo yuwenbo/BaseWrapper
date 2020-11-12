@@ -30,4 +30,14 @@
         <attr name="bottomDrawableHeight" format="reference|dimension" />
     </declare-styleable>
 
+    <declare-styleable name="CheckGridLayout">
+        <attr name="android:columnCount" format="integer" />
+        <attr name="checkMode" format="enum" >
+            <enum name="single" value="1"/>
+            <enum name="multiple" value="0"/>
+        </attr>
+        <attr name="android:dividerVertical" format="dimension" />
+        <attr name="android:dividerHorizontal" format="dimension" />
+    </declare-styleable>
+
 </resources>

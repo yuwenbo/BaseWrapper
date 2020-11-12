@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.OnClick;
 import usage.ywb.wrapper.R;
-import usage.ywb.wrapper.mvp.ui.base.activity.BaseWrapperActivity;
+import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity;
 import usage.ywb.wrapper.mvp.widgets.TitleLayout;
 import usage.ywb.wrapper.modules.home.contract.LoginContract;
 import usage.ywb.wrapper.modules.home.entity.Domain;

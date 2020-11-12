@@ -104,7 +104,7 @@ public class MediaActivity extends AppCompatActivity implements View.OnTouchList
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_media);
+        setContentView(R.layout.video_activity_media);
         videoIndex = getIntent().getIntExtra(Constants.VIDEO_INDEX, 0);
         initView();
         initAnimation();

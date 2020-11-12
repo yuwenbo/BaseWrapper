@@ -1,4 +1,4 @@
-package usage.ywb.wrapper.mvp.ui.base.activity;
+package usage.ywb.wrapper.mvp.common.activity;
 
 import android.app.Activity;
 

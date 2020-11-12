@@ -1,5 +1,8 @@
-//apply plugin: 'com.android.application'
-apply plugin: 'com.android.library'
+if (rootProject.ext.isLibraryModuleCamera) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
 
 android {
 
@@ -7,11 +10,40 @@ android {
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-//        applicationId "usage.ywb.wrapper.camera"
+        if (!rootProject.ext.isLibraryModuleCamera) {
+            applicationId "usage.ywb.wrapper.camera"
+        }
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
+
+        //Arouter路由配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath = true
+            }
+        }
+
+    }
+
+    /*
+    * java插件引入了一个概念叫做SourceSets，通过修改SourceSets中的属性，
+    * 可以指定哪些源文件（或文件夹下的源文件）要被编译，哪些源文件要被排除。
+    */
+    sourceSets {
+        main {
+            if (rootProject.ext.isLibraryModuleCamera) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    //library模式下，排除java/debug文件夹下的所有文件
+                    exclude '*module'
+                }
+            } else {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            }
+        }
     }
 
     buildTypes {
@@ -31,4 +63,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat"]
+    implementation project(path: ':base:mvp')
+
+    implementation rootProject.ext.dependencies["arouter_api"]
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
 }

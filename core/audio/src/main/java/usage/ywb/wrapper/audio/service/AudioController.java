@@ -12,8 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.RemoteException;
 
 import androidx.core.app.NotificationCompat;
 
@@ -43,19 +41,18 @@ public class AudioController extends IAudioController.Stub {
 
     //耳机插拔的系统广播
     private BroadcastReceiver receiver;
-    private AudioReceiver audioReceiver;
     private Timer timer;
+    private TimerTask timerTask;
 
     private MediaPlayer mediaPlayer;
     private AudioEntity entity;
 
-    private static final int NOTIFICATION_AUDIO_ID = 1;
 
+    private static final int NOTIFICATION_AUDIO_ID = 1;
 
     public AudioController(Context context) {
         this.context = context;
         this.mediaPlayer = new MediaPlayer();
-        this.timer = new Timer();
     }
 
     private void initNotification(AudioEntity entity) {
@@ -111,18 +108,18 @@ public class AudioController extends IAudioController.Stub {
                     }
                 }
             };
+            context.registerReceiver(receiver, filter);
         }
-        context.registerReceiver(receiver, filter);
     }
 
     private void setAudioReceiver() {
-//        Intent intent = new Intent(context, AudioReceiver.class);
-//
-//        context.sendBroadcast(intent);
+        Intent intent = new Intent(AudioReceiver.ACTION_CURRENT_POSITION);
+        intent.putExtra("CurrentPosition", mediaPlayer.getCurrentPosition());
+        context.sendBroadcast(intent);
     }
 
     @Override
-    public void setResource(AudioEntity entity) throws RemoteException {
+    public void setResource(AudioEntity entity) {
         this.entity = entity;
         if (entity != null) {
             initNotification(entity);
@@ -131,16 +128,16 @@ public class AudioController extends IAudioController.Stub {
     }
 
     @Override
-    public Bitmap getBitmap() throws RemoteException {
+    public Bitmap getBitmap() {
         return null;
     }
 
     @Override
-    public void prepare() throws RemoteException {
+    public void prepare() {
         try {
             initHeadset();
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(Uri.parse(entity.data).getPath());
+            mediaPlayer.setDataSource(entity.data);
             mediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
@@ -148,14 +145,8 @@ public class AudioController extends IAudioController.Stub {
     }
 
     @Override
-    public void play() throws RemoteException {
-        mediaPlayer.start();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                setAudioReceiver();
-            }
-        }, 100, 1000);
+    public void start() {
+        resume();
         if (notification != null) {
             notification.flags = Notification.FLAG_ONGOING_EVENT;
             manager.notify(NOTIFICATION_AUDIO_ID, notification);
@@ -163,27 +154,60 @@ public class AudioController extends IAudioController.Stub {
     }
 
     @Override
-    public boolean isPlaying() throws RemoteException {
+    public void resume() {
+        mediaPlayer.start();
+        if (timer == null) {
+            timer = new Timer();
+        }
+        if (timerTask != null) {
+            timerTask.cancel();
+            timer.purge();
+        }
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                setAudioReceiver();
+            }
+        };
+        timer.schedule(timerTask, 100, 1000);
+    }
+
+    @Override
+    public boolean isPlaying() {
         return mediaPlayer.isPlaying();
     }
 
     @Override
-    public void seek(int progress) throws RemoteException {
+    public void seek(int progress) {
         mediaPlayer.seekTo(progress);
     }
 
     @Override
-    public void stop() throws RemoteException {
+    public void pause() {
         mediaPlayer.pause();
+        if (timerTask != null) {
+            timerTask.cancel();
+            timerTask = null;
+        }
+        if (timer != null) {
+            timer.purge();
+        }
+    }
+
+    @Override
+    public void stop() {
+        pause();
+        mediaPlayer.stop();
         timer.cancel();
         if (notification != null) {
             notification.flags = Notification.FLAG_AUTO_CANCEL;
             manager.cancel(NOTIFICATION_AUDIO_ID);
         }
+        timer = null;
     }
 
     @Override
-    public void release() throws RemoteException {
+    public void release() {
         if (timer != null) {
             timer.cancel();
             timer = null;
@@ -194,7 +218,10 @@ public class AudioController extends IAudioController.Stub {
             notification.flags = Notification.FLAG_AUTO_CANCEL;
             manager.cancel(NOTIFICATION_AUDIO_ID);
         }
-        context.unregisterReceiver(receiver);
+        if (receiver != null) {
+            context.unregisterReceiver(receiver);
+            receiver = null;
+        }
     }
 
 

@@ -5,7 +5,7 @@ import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import usage.ywb.wrapper.mvp.ui.base.entity.ConvertEntity;
+import usage.ywb.wrapper.mvp.common.entity.ConvertEntity;
 import usage.ywb.wrapper.modules.home.entity.Domain;
 import usage.ywb.wrapper.modules.home.entity.Login;
 

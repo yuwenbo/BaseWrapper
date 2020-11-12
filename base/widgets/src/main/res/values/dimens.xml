@@ -3,5 +3,6 @@
 
     <dimen name="excel_cell_default_height">44dp</dimen>
     <dimen name="excel_left_default_width">115dp</dimen>
+    <dimen name="small_view_height">36dp</dimen>
 
 </resources>

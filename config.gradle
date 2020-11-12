@@ -3,15 +3,14 @@
  */
 ext {
 
-    modules = [
-            isLibraryModulePlayer: true
-
-    ]
+    isLibraryModuleAudio = true
+    isLibraryModuleCamera = true
+    isLibraryModuleVideo = true
 
     android = [
             applicationId    : "usage.ywb.wrapper",
 
-            versionCode      : 100,                    //版本号
+            versionCode      : 1,                    //版本号
             versionName      : "1.0.0",              //版本名称
 
             compileSdkVersion: 30,

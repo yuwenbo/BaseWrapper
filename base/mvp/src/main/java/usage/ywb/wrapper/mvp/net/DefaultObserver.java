@@ -1,7 +1,7 @@
 package usage.ywb.wrapper.mvp.net;
 
 
-import usage.ywb.wrapper.mvp.ui.base.entity.Entity;
+import usage.ywb.wrapper.mvp.common.entity.Entity;
 import usage.ywb.wrapper.mvp.ui.IBaseView;
 
 /**

@@ -43,7 +43,7 @@ public class AudiosListFragment extends Fragment implements AudioListAdapter.OnI
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_list, null);
+        final View view = inflater.inflate(R.layout.audio_fragment_list, null);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView = (RecyclerView) view.findViewById(R.id.audio_list);
         recyclerView.setLayoutManager(layoutManager);
@@ -90,7 +90,7 @@ public class AudiosListFragment extends Fragment implements AudioListAdapter.OnI
     @Override
     public void onItemClick(View convertView, int position) {
         ((MainActivity) getActivity()).setPosition(position);
-        ((MainActivity) getActivity()).play();
+        ((MainActivity) getActivity()).start();
     }
 
     @Override

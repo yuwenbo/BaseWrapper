@@ -11,8 +11,15 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-    }
 
+        //Arouter路由配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath = true
+            }
+        }
+    }
 
     buildTypes {
         release {
@@ -31,13 +38,20 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':base:mvp')
-    implementation project(path: ":core:audio")
-    implementation project(path: ":core:camera")
-    implementation project(path: ":core:video")
-
-
+    if (rootProject.ext.isLibraryModuleAudio) {
+        implementation project(path: ":core:audio")
+    }
+    if (rootProject.ext.isLibraryModuleCamera) {
+        implementation project(path: ":core:camera")
+    }
+    if (rootProject.ext.isLibraryModuleVideo) {
+        implementation project(path: ":core:video")
+    }
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["recyclerview"]
     implementation rootProject.ext.dependencies["butterknife"]
     annotationProcessor  rootProject.ext.dependencies["butterknife_compiler"]
+
+    implementation rootProject.ext.dependencies["arouter_api"]
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
 }

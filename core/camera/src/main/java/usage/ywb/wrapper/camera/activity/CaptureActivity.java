@@ -42,7 +42,7 @@ public class CaptureActivity extends AppCompatActivity implements CaptureHelper.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_capture);
+        setContentView(R.layout.camare_activity_capture);
         TextureView textureView = findViewById(R.id.capture_preview);
         viewfinderView = findViewById(R.id.view_finder);
         viewfinderView.setOnDrawCompletedListener(this);

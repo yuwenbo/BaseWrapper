@@ -3,11 +3,11 @@ package usage.ywb.wrapper.audio.ui.activity;
 import java.util.List;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -29,9 +29,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 import usage.ywb.wrapper.audio.IAudioController;
 import usage.ywb.wrapper.audio.R;
 import usage.ywb.wrapper.audio.entity.AudioEntity;
+import usage.ywb.wrapper.audio.service.AudioReceiver;
 import usage.ywb.wrapper.audio.ui.fragment.AudiosListFragment;
 import usage.ywb.wrapper.audio.ui.view.MarqueeTextView;
 import usage.ywb.wrapper.audio.service.AudioControllerService;
@@ -39,15 +42,16 @@ import usage.ywb.wrapper.audio.service.AudioControllerService;
 import usage.ywb.wrapper.audio.utils.AudioData;
 
 /**
- * @author frank.yu
+ * @author yuwenbo
  * @version 2015.05.25
  */
+@Route(path = "/audio/MainActivity")
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     /**
      * 列表页
      */
-    private AudiosListFragment fragmentLists;
+    private AudiosListFragment listFragment;
     /**
      * 进度条
      */
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private IAudioController iAudio;
 
     private ServiceConnection serviceConnection;
+    private AudioReceiver audioReceiver;
 
     private int position = -1;
     private int progress = 0;
@@ -99,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         setContentView(R.layout.audio_activity_main);
         Log.i("MainActivity", getApplicationInfo().processName);
         initView();
-        fragmentLists = new AudiosListFragment();
+        listFragment = new AudiosListFragment();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                     && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -131,9 +136,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private void initPlayer() {
         audiosList = AudioData.initAudiosList(this);
-        getSupportFragmentManager().beginTransaction().add(R.id.music_viewpager, fragmentLists).commit();
-        final Intent intent = new Intent();
-        intent.setClass(this, AudioControllerService.class);
+        getSupportFragmentManager().beginTransaction().add(R.id.music_viewpager, listFragment).commit();
         serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(final ComponentName name, final IBinder service) {
@@ -151,7 +154,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 }
             }
         };
+        Intent intent = new Intent(this, AudioControllerService.class);
         bindService(intent, serviceConnection, Service.BIND_AUTO_CREATE);
+        audioReceiver = new AudioReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                super.onReceive(context, intent);
+                if (ACTION_CURRENT_POSITION.equals(intent.getAction())) {
+                    progress = intent.getIntExtra("CurrentPosition", 0);
+                    setSeekPosition();
+                }
+            }
+        };
+        registerReceiver(audioReceiver, new IntentFilter(AudioReceiver.ACTION_CURRENT_POSITION));
     }
 
     public void setPosition(int position) {
@@ -161,14 +176,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     /**
      * 播放音乐
      */
-    public void play() {
+    public void start() {
         if (position != -1) {
             entity = audiosList.get(position);
             try {
                 setPlayerData();
                 iAudio.setResource(entity);
                 iAudio.prepare();
-                iAudio.play();
+                iAudio.start();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -183,18 +198,21 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 e.printStackTrace();
             }
         }
-        super.onStop();
     }
 
     /**
      * 重置音乐播放器界面
      */
     private void setPlayerData() {
-        fragmentLists.setCurrPosition(position);
+        listFragment.setCurrPosition(position);
         playingNameMtv.setText(entity.name);
         timeTotalTv.setText(DateFormat.format("mm:ss", entity.time));
-        timeCurrentTv.setText(DateFormat.format("mm:ss", progress));
         progressBar.setMax((int) entity.time);
+        setSeekPosition();
+    }
+
+    private void setSeekPosition() {
+        timeCurrentTv.setText(DateFormat.format("mm:ss", progress));
         progressBar.setProgress(progress);
     }
 
@@ -209,9 +227,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             }
             try {
                 if (iAudio.isPlaying()) {
-                    stop();
+                    iAudio.pause();
                 } else {
-                    play();
+                    iAudio.resume();
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -220,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             toNextMusic();
         } else if (id == R.id.music_playing_name) {
             if (position != -1) {
-                fragmentLists.setCurrPosition(position);
+                listFragment.setCurrPosition(position);
             }
         }
     }
@@ -233,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         if (position > audiosList.size() - 1) {
             position = 0;
         }
-        play();
+        start();
     }
 
     /**
@@ -244,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         if (position < 0) {
             position = audiosList.size() - 1;
         }
-        play();
+        start();
     }
 
     @Override
@@ -265,38 +283,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
-    /**
-     * 后退键事件监听
-     */
-    @Override
-    public void onBackPressed() {
-        AlertDialog alertDialog;
-        AlertDialog.Builder alertBuilder;
-        alertBuilder = new AlertDialog.Builder(this);
-        alertBuilder.setMessage("Sure you want to exit the application?");
-        alertBuilder.setTitle("Prompt");
-        alertBuilder.setPositiveButton("Ensure", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                MainActivity.super.onBackPressed();
-            }
-        });
-        alertBuilder.setNegativeButton("Cancel", null);
-        alertDialog = alertBuilder.create();
-        alertDialog.show();
-    }
-
-
     @Override
     protected void onDestroy() {
         try {
             if (iAudio != null && !iAudio.isPlaying()) {
                 iAudio.release();
+                iAudio = null;
             }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         unbindService(serviceConnection);
+        unregisterReceiver(audioReceiver);
         super.onDestroy();
     }
 

@@ -108,7 +108,7 @@ public class VideoActivity extends AppCompatActivity implements OnTouchListener,
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video);
+        setContentView(R.layout.video_activity_video);
         videoIndex = getIntent().getIntExtra(Constants.VIDEO_INDEX, 0);
         initView();
         initAnimation();

@@ -3,9 +3,9 @@
  */
 ext {
 
-    isLibraryModuleAudio = true
-    isLibraryModuleCamera = true
-    isLibraryModuleVideo = true
+    isLibraryModuleAudio = false
+    isLibraryModuleCamera = false
+    isLibraryModuleVideo = false
 
     android = [
             applicationId    : "usage.ywb.wrapper",

@@ -5,8 +5,6 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import usage.ywb.wrapper.mvp.BaseApplication;
-import usage.ywb.wrapper.mvp.common.activity.HookStartActivityUtil;
-import usage.ywb.wrapper.mvp.common.activity.ProxyActivity;
 
 /**
  * @author yuwenbo
@@ -16,23 +14,12 @@ public class MyApp extends BaseApplication {
 
     private static final String TAG = "MyApp";
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        HookStartActivityUtil hookStartActivityUtil = new HookStartActivityUtil(this, ProxyActivity.class);
-        try {
-            hookStartActivityUtil.hookStartActivity();
-            hookStartActivityUtil.hookLaunchActivity();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
         //记录冷启动的开始时间点
         Log.i(TAG, String.valueOf(SystemClock.currentThreadTimeMillis()));
+        super.attachBaseContext(base);
     }
 
 }

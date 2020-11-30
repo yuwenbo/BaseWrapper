@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import usage.ywb.wrapper.mvp.presenter.IBasePresenter;
 import usage.ywb.wrapper.mvp.proxy.IPresenterProxy;
 import usage.ywb.wrapper.mvp.proxy.PresenterProxyImpl;
+import usage.ywb.wrapper.mvp.utils.PermissionUtils;
 
 
 /**
@@ -23,7 +25,7 @@ import usage.ywb.wrapper.mvp.proxy.PresenterProxyImpl;
  * @author yuwenbo
  * @version [ V.1.0.0  2019/3/14 ]
  */
-public abstract class BaseActivity extends AppCompatActivity implements IBaseView, IDelegate {
+public class BaseActivity extends AppCompatActivity implements IBaseView, IDelegate, PermissionUtils.PermissionCallbacks {
 
 
     private LoadingDialog loadingDialog;
@@ -112,16 +114,31 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     @Override
-    protected void onDestroy() {
-        mPresenterProxy.unbindPresenter();
-        super.onDestroy();
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public <T extends Activity> T getActivity() {
         return (T) this;
     }
 
+    @Override
+    public final void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, String[] perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, String[] perms) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenterProxy.unbindPresenter();
+        super.onDestroy();
+    }
 
 }

@@ -8,6 +8,8 @@ import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import usage.ywb.wrapper.mvp.common.hook.AMSHookHelper;
+
 /**
  * @author yuwenbo
  * @version [ V.2.9.3  2020/9/29 ]
@@ -20,9 +22,16 @@ public class BaseApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         application = this;
+        try {
+            AMSHookHelper.hookAMS();
+            AMSHookHelper.hookHandler();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //MultiDexf分包初始化，必须最先初始化
         MultiDex.install(this);
     }
+
 
     @Override
     public void onCreate() {

@@ -5,9 +5,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
 import usage.ywb.wrapper.R;
 import usage.ywb.wrapper.mvp.common.activity.BaseSearchActivity;
 import usage.ywb.wrapper.mvp.widgets.SearchLayout;
@@ -33,8 +30,7 @@ public class TestSearchActivity extends BaseSearchActivity {
     @Override
     public void onSearchClick(TextView view) {
         super.onSearchClick(view);
-        LinkedHashMap linkedHashMap;
-        HashMap hashMap;
+
     }
 
 

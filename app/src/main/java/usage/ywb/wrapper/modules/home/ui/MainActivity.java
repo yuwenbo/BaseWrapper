@@ -1,24 +1,34 @@
 package usage.ywb.wrapper.modules.home.ui;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 
+import butterknife.OnClick;
 import dalvik.system.DexClassLoader;
 import usage.ywb.wrapper.R;
 import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity;
+import usage.ywb.wrapper.mvp.common.hook.FileDexUtils;
+import usage.ywb.wrapper.mvp.utils.PermissionUtils;
 
 /**
  * @author yuwenbo
@@ -28,6 +38,7 @@ public class MainActivity extends BaseWrapperActivity {
 
     Handler handler;
 
+    private static final String[] PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,72 +52,71 @@ public class MainActivity extends BaseWrapperActivity {
                 startActivity(new Intent(MainActivity.this, clazz));
             }
         };
+    }
 
-        findViewById(R.id.load).setOnClickListener(v -> {
-            File file = copyToCache("CircleLayout");
-            loadFile(file);
-        });
+    @OnClick(R.id.load)
+    protected void load(){
+        PermissionUtils.requestPermissions(MainActivity.this, 1, PERMISSIONS);
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Log.i("MainActivity", "" + Thread.currentThread().getId());
-            requestPermissions(new String[]{"android.permission.READ_EXTERNAL_STORAGE"}, 1);
-        }
-
-
-
+    @OnClick(R.id.repair)
+    protected void repair(){
+        File file = copyToCache("audio.apk");
+        FileDexUtils.loadFixedDex(this, file);
     }
 
 
     private File copyToCache(String name) {
         String path = Environment.getExternalStorageDirectory().getPath() +
-                File.separator + "Download" + File.separator + "CarGeer" + File.separator + name + ".apk";
-        File cache = getCacheDir();
-        if (!cache.exists() && cache.mkdirs()) {
+                File.separator + "Download" + File.separator + name;
+        File source = new File(path);
+        if (!source.exists() || !source.isFile()) {
+            return null;
+        }
+        File dir = getCacheDir();
+        if (!dir.exists() && dir.mkdirs()) {
             Log.i("MainActivity", "创建新文件夹");
         }
-        String d = cache.getPath() + "/" + name + ".apk";
-        File copy = new File(d);
-        FileInputStream inputStream = null;
-        FileOutputStream outputStream = null;
+        File plugin = new File(dir.getPath() + File.separator + name);
+        FileChannel input = null;
+        FileChannel output = null;
         try {
-            if (!copy.exists()) {
-                if (copy.createNewFile()) {
-                    Log.i("MainActivity", "创建新文件");
-                }
-                inputStream = new FileInputStream(path);
-                outputStream = new FileOutputStream(copy);
-                byte[] buff = new byte[1024];
-                while (-1 != inputStream.read(buff)) {
-                    outputStream.write(buff);
-                }
+            if (!plugin.exists() || plugin.createNewFile()) {
+                Log.i("MainActivity", "创建新文件");
+            }
+            if (plugin.length() != source.length()) {
+                input = new FileInputStream(source).getChannel();
+                output = new FileOutputStream(plugin).getChannel();
+                output.transferFrom(input, 0, input.size());
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (outputStream != null) {
+            if (output != null) {
                 try {
-                    outputStream.close();
+                    output.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if (inputStream != null) {
+            if (input != null) {
                 try {
-                    inputStream.close();
+                    input.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return copy;
+        return plugin;
     }
 
 
     private void loadFile(final File file) {
         new Thread(() -> {
-            DexClassLoader classLoader = new DexClassLoader(file.getPath(), file.getAbsolutePath(), null, getClassLoader());
+            // 根据apk路径加载apk代码到DexClassLoader中
+            DexClassLoader classLoader = new DexClassLoader(file.getPath(), file.getAbsolutePath(), null, ClassLoader.getSystemClassLoader());
             try {
-                Class clazz = classLoader.loadClass("usage.ywb.wrapper.circlelayout.ui.MainActivity");
+                Class clazz = classLoader.loadClass("usage.ywb.wrapper.audio.ui.activity.MainActivity");
                 Message message = handler.obtainMessage(1, clazz);
                 handler.sendMessage(message);
             } catch (ClassNotFoundException e) {
@@ -115,10 +125,11 @@ public class MainActivity extends BaseWrapperActivity {
         }).start();
     }
 
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
+    public void onPermissionsGranted(int requestCode, String[] perms) {
+        super.onPermissionsGranted(requestCode, perms);
+        File file = copyToCache("audio.apk");
+        loadFile(file);
     }
+
 }

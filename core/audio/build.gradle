@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         if (!rootProject.ext.isLibraryModuleAudio) {
-            applicationId "usage.ywb.wrapper.audio"
+            applicationId "usage.ywb.wrapper"
         }
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
@@ -25,7 +25,11 @@ android {
                 includeCompileClasspath = true
             }
         }
+
+        /**添加多 dex分包支持*/
+        multiDexEnabled true
     }
+
 
     /*
      * java插件引入了一个概念叫做SourceSets，通过修改SourceSets中的属性，

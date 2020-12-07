@@ -1,33 +1,26 @@
 package usage.ywb.wrapper.modules.home.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
 
 import butterknife.OnClick;
 import dalvik.system.DexClassLoader;
 import usage.ywb.wrapper.R;
 import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity;
-import usage.ywb.wrapper.mvp.common.hook.FileDexUtils;
+import usage.ywb.wrapper.mvp.common.hook.HookHelper;
+import usage.ywb.wrapper.mvp.common.hook.PluginClassLoaderHelper;
 import usage.ywb.wrapper.mvp.utils.PermissionUtils;
 
 /**
@@ -36,33 +29,22 @@ import usage.ywb.wrapper.mvp.utils.PermissionUtils;
  */
 public class MainActivity extends BaseWrapperActivity {
 
-    Handler handler;
-
     private static final String[] PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        handler = new Handler(getMainLooper()) {
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                super.handleMessage(msg);
-                Class clazz = (Class) msg.obj;
-                startActivity(new Intent(MainActivity.this, clazz));
-            }
-        };
     }
 
     @OnClick(R.id.load)
-    protected void load(){
+    protected void load() {
         PermissionUtils.requestPermissions(MainActivity.this, 1, PERMISSIONS);
     }
 
     @OnClick(R.id.repair)
-    protected void repair(){
-        File file = copyToCache("audio.apk");
-        FileDexUtils.loadFixedDex(this, file);
+    protected void repair() {
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
 
@@ -77,7 +59,7 @@ public class MainActivity extends BaseWrapperActivity {
         if (!dir.exists() && dir.mkdirs()) {
             Log.i("MainActivity", "创建新文件夹");
         }
-        File plugin = new File(dir.getPath() + File.separator + name);
+        File plugin = new File(dir, name);
         FileChannel input = null;
         FileChannel output = null;
         try {
@@ -112,18 +94,20 @@ public class MainActivity extends BaseWrapperActivity {
 
 
     private void loadFile(final File file) {
-        new Thread(() -> {
-            // 根据apk路径加载apk代码到DexClassLoader中
-            DexClassLoader classLoader = new DexClassLoader(file.getPath(), file.getAbsolutePath(), null, ClassLoader.getSystemClassLoader());
-            try {
-                Class clazz = classLoader.loadClass("usage.ywb.wrapper.audio.ui.activity.MainActivity");
-                Message message = handler.obtainMessage(1, clazz);
-                handler.sendMessage(message);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        // 根据apk路径加载apk代码到DexClassLoader中
+        DexClassLoader classLoader = PluginClassLoaderHelper.getHelper().getClassLoader("audio.apk");
+        try {
+            Class clazz = classLoader.loadClass("usage.ywb.wrapper.audio.ui.activity.MainActivity");
+            Intent intent = new Intent();
+            intent.setClassName("usage.ywb.wrapper.audio", clazz.getName());
+            HookHelper.getInstance().replaceClassLoader(this, classLoader);
+//            loadResources(classLoader, file.getAbsolutePath());
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     public void onPermissionsGranted(int requestCode, String[] perms) {

@@ -20,7 +20,6 @@ public class FileDexUtils {
     private static final String APK_SUFFIX = ".apk";
     private static final String JAR_SUFFIX = ".jar";
     private static final String ZIP_SUFFIX = ".zip";
-    public static final String DEX_DIR = "odex";
     private static final String OPTIMIZE_DEX_DIR = "optimize_dex";
     private static HashSet<File> loadedDex = new HashSet<>();
 
@@ -127,6 +126,9 @@ public class FileDexUtils {
         System.arraycopy(arrayRhs, 0, result, i, j);
         return result;
     }
+
+
+
 
 
 }

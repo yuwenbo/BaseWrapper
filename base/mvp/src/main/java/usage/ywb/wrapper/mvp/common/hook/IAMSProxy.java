@@ -34,7 +34,7 @@ public class IAMSProxy implements InvocationHandler {
                 Intent intent = (Intent) args[index];
                 Intent subIntent = new Intent();//2
                 subIntent.setClassName(BaseApplication.getApplication().getPackageName(), ProxyActivity.class.getName());//3
-                subIntent.putExtra(AMSHookHelper.TARGET_INTENT, intent);//4
+                subIntent.putExtra(HookHelper.TARGET_INTENT, intent);//4
                 args[index] = subIntent;//5
             } else {
                 return method.invoke(o, args);

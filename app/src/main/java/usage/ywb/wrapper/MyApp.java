@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import usage.ywb.wrapper.mvp.BaseApplication;
+import usage.ywb.wrapper.mvp.common.hook.HookHelper;
 
 /**
  * @author yuwenbo
@@ -20,6 +21,9 @@ public class MyApp extends BaseApplication {
         //记录冷启动的开始时间点
         Log.i(TAG, String.valueOf(SystemClock.currentThreadTimeMillis()));
         super.attachBaseContext(base);
+        /*----------------------------------------------------------------------------------------*/
+        HookHelper.getInstance().init(base);
     }
+
 
 }

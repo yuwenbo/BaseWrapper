@@ -3,9 +3,9 @@
  */
 ext {
 
-    isLibraryModuleAudio = false
-    isLibraryModuleCamera = false
-    isLibraryModuleVideo = false
+    isLibraryModuleAudio = true
+    isLibraryModuleCamera = true
+    isLibraryModuleVideo = true
 
     android = [
             applicationId    : "usage.ywb.wrapper",
@@ -47,7 +47,9 @@ ext {
 
             arouterApiVersion       : "1.4.1",
             arouterCompilerVersion  : "1.2.2",
-            arouterAnnotationVersion: "1.0.4"
+            arouterAnnotationVersion: "1.0.4",
+
+            virtualApkVersion       : "0.9.8"
     ]
 
     /**
@@ -90,6 +92,9 @@ ext {
             "arouter_api"               : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
             "arouter_compiler"          : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
             "arouter_annotation"        : "com.alibaba:arouter-annotation:${versions["arouterAnnotationVersion"]}",
+
+            "virtualapk_core"           : "com.didi.virtualapk:core:${versions["virtualApkVersion"]}",
+            "virtualapk_gradle"         : "com.didi.virtualapk:gradle:0.9.8.6",
 
             "eventbus"                  : "org.greenrobot:eventbus:${versions["eventbusVersion"]}"
     ]

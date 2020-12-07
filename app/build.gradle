@@ -12,7 +12,8 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        /**添加多 dex分包支持*/
+        multiDexEnabled true
     }
 
     // 指定jdk版本为1.8 或以上
@@ -27,7 +28,7 @@ android {
             buildConfigField "boolean", "LOG_OPEN", "false"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             buildConfigField "boolean", "LOG_OPEN", "true"
         }
     }
@@ -60,8 +61,6 @@ dependencies {
 
     implementation rootProject.ext.dependencies["eventbus"]
     implementation rootProject.ext.dependencies["butterknife"]
-    annotationProcessor  rootProject.ext.dependencies["butterknife_compiler"]
-
-
+    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
 
 }

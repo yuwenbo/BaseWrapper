@@ -60,9 +60,11 @@ public class HCallback implements Handler.Callback {
                     Class<?> LaunchActivityItemClazz = Class.forName("android.app.servertransaction.LaunchActivityItem");
                     Intent intent = (Intent) FieldUtil.getField(LaunchActivityItemClazz, o, "mIntent");
                     //得到我们设置的class 替换进去
-                    if (intent.getParcelableExtra(AMSHookHelper.TARGET_INTENT) != null) {
-                        Intent target = intent.getParcelableExtra(AMSHookHelper.TARGET_INTENT);
-                        intent.setComponent(target.getComponent());
+                    if (intent.getParcelableExtra(HookHelper.TARGET_INTENT) != null) {
+                        Intent target = intent.getParcelableExtra(HookHelper.TARGET_INTENT);
+                        if (target != null && target.getComponent() != null) {
+                            intent.setComponent(target.getComponent());
+                        }
                     }
                 }
             }
@@ -75,7 +77,7 @@ public class HCallback implements Handler.Callback {
         try {
             //获取ActivityClientRecord中的intent
             Intent intent = (Intent) FieldUtil.getField(obj.getClass(), obj, "intent");
-            Intent target = intent.getParcelableExtra(AMSHookHelper.TARGET_INTENT);
+            Intent target = intent.getParcelableExtra(HookHelper.TARGET_INTENT);
             intent.setComponent(target.getComponent());
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package usage.ywb.wrapper.mvp.common.hook;
+package usage.ywb.wrapper.pluggable.proxy;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -7,22 +7,17 @@ import android.app.Instrumentation;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
-import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
-import dalvik.system.DexClassLoader;
-import usage.ywb.wrapper.mvp.common.activity.ProxyActivity;
+import usage.ywb.wrapper.pluggable.core.PluginHelper;
 
 /**
  * @author yuwenbo
@@ -46,7 +41,7 @@ public class InstrumentationProxy extends Instrumentation {
         if (infoList.size() == 0) {
             isIntentFromPlugin = true;
             mIntent = new Intent(who, ProxyActivity.class);
-            mIntent.putExtra(HookHelper.TARGET_INTENT, intent);
+            mIntent.putExtra(PluginHelper.TARGET_INTENT, intent);
         } else {
             isIntentFromPlugin = false;
             mIntent = intent;
@@ -69,7 +64,7 @@ public class InstrumentationProxy extends Instrumentation {
     @Override
     public Activity newActivity(ClassLoader cl, String className, Intent intent) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         if (intent != null) {
-            Intent targetIntent = intent.getParcelableExtra(HookHelper.TARGET_INTENT);
+            Intent targetIntent = intent.getParcelableExtra(PluginHelper.TARGET_INTENT);
             if (targetIntent != null && targetIntent.getComponent() != null) {
                 ComponentName componentName = targetIntent.getComponent();
 //                ClassLoader classLoader = PluginClassLoaderHelper.getHelper().getClassLoader("audio.apk");

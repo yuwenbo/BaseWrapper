@@ -1,4 +1,4 @@
-package usage.ywb.wrapper.mvp.common.hook;
+package usage.ywb.wrapper.pluggable.core;
 
 import android.app.Instrumentation;
 import android.content.ComponentName;
@@ -6,44 +6,53 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
 import java.util.Map;
 
 import dalvik.system.DexClassLoader;
-import usage.ywb.wrapper.mvp.BaseApplication;
-import usage.ywb.wrapper.mvp.common.activity.ProxyActivity;
-import usage.ywb.wrapper.mvp.utils.FieldUtil;
+import usage.ywb.wrapper.pluggable.proxy.HCallback;
+import usage.ywb.wrapper.pluggable.proxy.IAMSProxy;
+import usage.ywb.wrapper.pluggable.proxy.InstrumentationProxy;
+import usage.ywb.wrapper.pluggable.proxy.ProxyActivity;
+import usage.ywb.wrapper.pluggable.utils.FieldUtil;
 
 /**
  * @author yuwenbo
  * @version [ V.2.9.6  2020/11/23 ]
  */
-public class HookHelper {
+public class PluginHelper {
 
     public static final String TARGET_INTENT = "target_intent";
 
-    private volatile static HookHelper hookHelper;
+    private volatile static PluginHelper hookHelper;
 
-    private Context mBase;
-    private DexClassLoader mClassLoader;
+    private Context mHostBaseContext;
 
-    public static HookHelper getInstance() {
+    private final Map<String, LoadedPlugin> mLoadedPluginMap;
+
+    public static PluginHelper getInstance() {
         if (hookHelper == null) {
-            synchronized (HookHelper.class) {
+            synchronized (PluginHelper.class) {
                 if (hookHelper == null) {
-                    hookHelper = new HookHelper();
+                    hookHelper = new PluginHelper();
                 }
             }
         }
         return hookHelper;
     }
 
-    public void init(Context base){
-        this.mBase = base;
+    public PluginHelper() {
+        mLoadedPluginMap = new HashMap<>();
+    }
+
+    public void init(Context base) {
+        this.mHostBaseContext = base;
         try {
             hookInstrumentation();
         } catch (Exception e) {
@@ -51,9 +60,29 @@ public class HookHelper {
         }
     }
 
+    public Context getHostBaseContext() {
+        return mHostBaseContext;
+    }
+
+    public LoadedPlugin loadPlugin(File file) {
+        if (mLoadedPluginMap.containsKey(file.getPath())) {
+            return mLoadedPluginMap.get(file.getPath());
+        } else {
+            return new LoadedPlugin(mHostBaseContext, file);
+        }
+    }
+
+    public LoadedPlugin loadPlugin(String path) {
+        if (mLoadedPluginMap.containsKey(path)) {
+            return mLoadedPluginMap.get(path);
+        } else {
+            return new LoadedPlugin(mHostBaseContext, new File(path));
+        }
+    }
+
     private void hookInstrumentation() throws Exception {
         Class<?> contextImplClass = Class.forName("android.app.ContextImpl");
-        Object mMainThread = FieldUtil.getField(contextImplClass, mBase, "mMainThread");
+        Object mMainThread = FieldUtil.getField(contextImplClass, mHostBaseContext, "mMainThread");
         Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
         Instrumentation mInstrumentation = (Instrumentation) FieldUtil.getField(activityThreadClass, mMainThread, "mInstrumentation");
         FieldUtil.setField(activityThreadClass, mMainThread, "mInstrumentation", new InstrumentationProxy(mInstrumentation));
@@ -144,7 +173,7 @@ public class HookHelper {
      * 解决AppCompatActivity无法hook的问题
      */
     @Deprecated
-    private static class PackageManagerHandler implements InvocationHandler {
+    private class PackageManagerHandler implements InvocationHandler {
         private Object IPackageManager;
 
         public PackageManagerHandler(Object IPackageManager) {
@@ -154,7 +183,7 @@ public class HookHelper {
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             if ("getActivityInfo".equals(method.getName())) {
-                args[0] = new ComponentName(BaseApplication.getApplication().getPackageName(), ProxyActivity.class.getName());
+                args[0] = new ComponentName(mHostBaseContext.getPackageName(), ProxyActivity.class.getName());
             }
             return method.invoke(IPackageManager, args);
         }

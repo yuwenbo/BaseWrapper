@@ -1,7 +1,10 @@
 package usage.ywb.wrapper.video.player.model;
 
+import android.text.format.DateFormat;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+
 
 /**
  * @author yuwenbo
@@ -45,4 +48,14 @@ public class VideoEntity implements Serializable {
     public void setTime(long time) {
         this.time = time;
     }
+
+    public String getSizeText() {
+        return String.format("%s MB", new DecimalFormat("#.##").format((float) getSize() / 1024 / 1024));
+    }
+
+    public String getTimeText() {
+        return DateFormat.format("mm:ss", getTime()).toString();
+    }
+
+
 }

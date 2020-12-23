@@ -29,7 +29,7 @@ public class GlobalCache {
 
     //根据服务器类型获取所有的接口相同部分的完整地址
     public static String getRootPath() {
-        return Key.HTTP + dynamicDomain + "/" + Key.PATH;
+        return Key.PROTOCOL + dynamicDomain + "/" + Key.PATH;
     }
 
     public static void setDomain(String domain) {

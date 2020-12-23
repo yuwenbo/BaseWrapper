@@ -1,4 +1,4 @@
-package usage.ywb.wrapper.mvp.common.hook;
+package usage.ywb.wrapper.pluggable.utils;
 
 import android.content.Context;
 
@@ -8,7 +8,6 @@ import java.util.HashSet;
 
 import dalvik.system.DexClassLoader;
 import dalvik.system.PathClassLoader;
-import usage.ywb.wrapper.mvp.utils.FieldUtil;
 
 /**
  * @author yuwenbo

@@ -1,12 +1,11 @@
-package usage.ywb.wrapper.mvp.common.hook;
+package usage.ywb.wrapper.pluggable.proxy;
 
 import android.content.Intent;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-import usage.ywb.wrapper.mvp.BaseApplication;
-import usage.ywb.wrapper.mvp.common.activity.ProxyActivity;
+import usage.ywb.wrapper.pluggable.core.PluginHelper;
 
 /**
  * @author yuwenbo
@@ -22,7 +21,7 @@ public class IAMSProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object o, Method method, Object[] args) throws Throwable {
-        if (method.getName().equals("startActivity")) {//1
+        if (method.getName().equals("startActivity")) {
             int index = -1;
             for (int i = 0; i < args.length; i++) {
                 if (args[i] instanceof Intent) {
@@ -32,10 +31,10 @@ public class IAMSProxy implements InvocationHandler {
             }
             if (index != -1) {
                 Intent intent = (Intent) args[index];
-                Intent subIntent = new Intent();//2
-                subIntent.setClassName(BaseApplication.getApplication().getPackageName(), ProxyActivity.class.getName());//3
-                subIntent.putExtra(HookHelper.TARGET_INTENT, intent);//4
-                args[index] = subIntent;//5
+                Intent subIntent = new Intent();
+                subIntent.setClassName(PluginHelper.getInstance().getHostBaseContext().getPackageName(), ProxyActivity.class.getName());//3
+                subIntent.putExtra(PluginHelper.TARGET_INTENT, intent);
+                args[index] = subIntent;
             } else {
                 return method.invoke(o, args);
             }

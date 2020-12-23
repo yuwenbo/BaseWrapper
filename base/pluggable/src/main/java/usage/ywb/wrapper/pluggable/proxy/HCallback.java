@@ -1,15 +1,18 @@
-package usage.ywb.wrapper.mvp.common.hook;
+package usage.ywb.wrapper.pluggable.proxy;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 
-import org.jetbrains.annotations.NotNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import usage.ywb.wrapper.mvp.utils.FieldUtil;
+import usage.ywb.wrapper.pluggable.core.PluginHelper;
+import usage.ywb.wrapper.pluggable.utils.FieldUtil;
+
 
 /**
  * @author yuwenbo
@@ -33,7 +36,7 @@ public class HCallback implements Handler.Callback {
     }
 
     @Override
-    public boolean handleMessage(@NotNull Message msg) {
+    public boolean handleMessage(@NonNull Message msg) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             if (msg.what == EXECUTE_TRANSACTION) {
                 restoreIntent28(msg.obj);
@@ -60,8 +63,8 @@ public class HCallback implements Handler.Callback {
                     Class<?> LaunchActivityItemClazz = Class.forName("android.app.servertransaction.LaunchActivityItem");
                     Intent intent = (Intent) FieldUtil.getField(LaunchActivityItemClazz, o, "mIntent");
                     //得到我们设置的class 替换进去
-                    if (intent.getParcelableExtra(HookHelper.TARGET_INTENT) != null) {
-                        Intent target = intent.getParcelableExtra(HookHelper.TARGET_INTENT);
+                    if (intent.getParcelableExtra(PluginHelper.TARGET_INTENT) != null) {
+                        Intent target = intent.getParcelableExtra(PluginHelper.TARGET_INTENT);
                         if (target != null && target.getComponent() != null) {
                             intent.setComponent(target.getComponent());
                         }
@@ -77,7 +80,7 @@ public class HCallback implements Handler.Callback {
         try {
             //获取ActivityClientRecord中的intent
             Intent intent = (Intent) FieldUtil.getField(obj.getClass(), obj, "intent");
-            Intent target = intent.getParcelableExtra(HookHelper.TARGET_INTENT);
+            Intent target = intent.getParcelableExtra(PluginHelper.TARGET_INTENT);
             intent.setComponent(target.getComponent());
         } catch (Exception e) {
             e.printStackTrace();

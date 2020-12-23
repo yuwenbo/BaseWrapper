@@ -33,7 +33,7 @@ public class LoginModel extends BaseModel implements LoginContract.LoginModel {
 
     @Override
     public void getDomain(String username, ConvertObserver<Domain> observer) {
-        ILoginApi iLogin = OkHttpManager.createApi(ILoginApi.class, Key.HTTP + Key.HOST);
+        ILoginApi iLogin = OkHttpManager.createApi(ILoginApi.class, Key.PROTOCOL + Key.HOST);
         iLogin.getDomain(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

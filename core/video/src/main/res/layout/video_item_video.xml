@@ -1,48 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/button_item"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/video_icon"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/box_image"
-        android:padding="1px"
-        android:scaleType="fitCenter" />
+    <data>
 
-    <RelativeLayout
-        android:layout_width="0dp"
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="activity"
+            type="usage.ywb.wrapper.video.player.ui.activity.VideoListActivity" />
+
+        <variable
+            name="entity"
+            type="usage.ywb.wrapper.video.player.model.VideoEntity" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_weight="1">
+        android:background="@drawable/button_item"
+        android:gravity="center_vertical"
+        android:onClick="@{(v)->activity.onClick(v, position)}"
+        android:orientation="horizontal">
 
-        <usage.ywb.wrapper.video.player.ui.view.MarqueeTextView
-            android:id="@+id/video_name"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/video_icon"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/box_image"
+            android:padding="1px"
+            android:scaleType="fitCenter"
+            app:url="@{entity.uri}" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:layout_margin="12dp"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/video_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/video_name"
-            android:textColor="#ffffff" />
+            <usage.ywb.wrapper.video.player.ui.view.MarqueeTextView
+                android:id="@+id/video_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{entity.name}"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/video_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/video_name"
-            android:textColor="#ffffff" />
+            <TextView
+                android:id="@+id/video_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/video_name"
+                android:text="@{entity.sizeText}"
+                android:textColor="#ffffff" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/video_name"
+                android:layout_alignParentRight="true"
+                android:text="@{entity.timeText}"
+                android:textColor="#ffffff" />
 
-</LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

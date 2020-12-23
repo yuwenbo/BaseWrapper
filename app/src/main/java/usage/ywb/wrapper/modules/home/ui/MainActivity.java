@@ -16,12 +16,11 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 
 import butterknife.OnClick;
-import dalvik.system.DexClassLoader;
 import usage.ywb.wrapper.R;
 import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity;
-import usage.ywb.wrapper.mvp.common.hook.HookHelper;
-import usage.ywb.wrapper.mvp.common.hook.PluginClassLoaderHelper;
 import usage.ywb.wrapper.mvp.utils.PermissionUtils;
+import usage.ywb.wrapper.pluggable.core.PluginHelper;
+import usage.ywb.wrapper.pluggable.core.LoadedPlugin;
 
 /**
  * @author yuwenbo
@@ -95,12 +94,12 @@ public class MainActivity extends BaseWrapperActivity {
 
     private void loadFile(final File file) {
         // 根据apk路径加载apk代码到DexClassLoader中
-        DexClassLoader classLoader = PluginClassLoaderHelper.getHelper().getClassLoader("audio.apk");
+        LoadedPlugin plugin = PluginHelper.getInstance().loadPlugin(new File(getCacheDir().getPath(), "audio.apk"));
         try {
-            Class clazz = classLoader.loadClass("usage.ywb.wrapper.audio.ui.activity.MainActivity");
+            Class<?> clazz = plugin.getClassLoader().loadClass("usage.ywb.wrapper.audio.ui.activity.MainActivity");
             Intent intent = new Intent();
             intent.setClassName("usage.ywb.wrapper.audio", clazz.getName());
-            HookHelper.getInstance().replaceClassLoader(this, classLoader);
+            PluginHelper.getInstance().replaceClassLoader(this, plugin.getClassLoader());
 //            loadResources(classLoader, file.getAbsolutePath());
             startActivity(intent);
         } catch (Exception e) {

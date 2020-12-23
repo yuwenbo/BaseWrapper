@@ -1,5 +1,7 @@
 package usage.ywb.wrapper.video.player.ui.view;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,22 +16,18 @@ import usage.ywb.wrapper.video.R;
  */
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView image;
-    public MarqueeTextView name;
-    public TextView size;
-    public TextView time;
+    private final ViewDataBinding binding;
 
     /**
      * @param itemView
      */
     public ViewHolder(View itemView) {
         super(itemView);
+        binding = DataBindingUtil.bind(itemView);
+    }
 
-        image = (ImageView) itemView.findViewById(R.id.video_icon);
-        name = (MarqueeTextView) itemView.findViewById(R.id.video_name);
-        size = (TextView) itemView.findViewById(R.id.video_size);
-        time = (TextView) itemView.findViewById(R.id.video_time);
-
+    public ViewDataBinding getBinding() {
+        return binding;
     }
 
 }

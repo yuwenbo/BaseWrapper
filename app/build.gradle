@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation project(path: ':core:net')
     implementation project(path: ':base:mvp')
+    implementation project(path: ':base:pluggable')
     implementation project(path: ":base:widgets")
 
     implementation rootProject.ext.dependencies["appcompat"]

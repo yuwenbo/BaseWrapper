@@ -11,7 +11,7 @@ import usage.ywb.wrapper.mvp.BuildConfig;
  */
 public class LogUtils {
 
-    private static String TAG = BuildConfig.APPLICATION_ID;
+    private static String TAG = BuildConfig.LIBRARY_PACKAGE_NAME;
     private static int LEVEL = Log.VERBOSE;
 
     private static boolean LOGGABLE = Log.isLoggable(TAG, Log.INFO);

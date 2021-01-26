@@ -18,10 +18,31 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class OkHttpManager {
 
-    private static OkHttpClient okHttpClient;
-
     private static String rootPath = "";
-    
+
+    private static final class OkHttpClientInstance{
+        protected static final OkHttpClient INSTANCE = OkHttpManager.createOkHttpClient();
+    }
+
+    private static OkHttpClient createOkHttpClient(){
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(20000, TimeUnit.MILLISECONDS);
+        builder.callTimeout(25000, TimeUnit.MILLISECONDS);
+        builder.readTimeout(15000, TimeUnit.MILLISECONDS);
+        builder.writeTimeout(25000, TimeUnit.MILLISECONDS);
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT);
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        builder.addNetworkInterceptor(logInterceptor);
+        builder.addInterceptor(new GlobalInterceptor());
+        return  builder.build();
+    }
+
+    public static OkHttpClient getOkHttpClient() {
+        return OkHttpClientInstance.INSTANCE;
+    }
+
     public static <T> T createApi(Class<T> clazz){
         Retrofit retrofit = getRetrofit(rootPath);
         return retrofit.create(clazz);
@@ -30,24 +51,6 @@ public class OkHttpManager {
     public static <T> T createApi(Class<T> clazz, String baseUrl){
         Retrofit retrofit = getRetrofit(baseUrl);
         return retrofit.create(clazz);
-    }
-
-    public static OkHttpClient getOkHttpClient() {
-        if (okHttpClient == null) {
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.connectTimeout(20000, TimeUnit.MILLISECONDS);
-            builder.callTimeout(25000, TimeUnit.MILLISECONDS);
-            builder.readTimeout(15000, TimeUnit.MILLISECONDS);
-            builder.writeTimeout(25000, TimeUnit.MILLISECONDS);
-
-            HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT);
-            logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-            builder.addNetworkInterceptor(logInterceptor);
-            builder.addInterceptor(new GlobalInterceptor());
-            okHttpClient = builder.build();
-        }
-        return okHttpClient;
     }
 
     private static Gson getGson(){

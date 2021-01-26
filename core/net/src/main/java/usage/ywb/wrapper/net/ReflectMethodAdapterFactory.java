@@ -138,7 +138,7 @@ public class ReflectMethodAdapterFactory implements TypeAdapterFactory {
                     continue;
                 }
                 accessor.makeAccessible(method);
-                Class parameterType = method.getParameterTypes()[0];
+                Class<?> parameterType = method.getParameterTypes()[0];
                 Type fieldType = $Gson$Types.resolve(type.getType(), raw, parameterType);
                 BoundMethod previous = null;
                 for (int i = 0, size = methodNames.size(); i < size; ++i) {

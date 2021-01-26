@@ -3,6 +3,12 @@ apply from: "config.gradle"
 
 buildscript {
     repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url'https://maven.aliyun.com/repository/public/' }
+        maven { url'https://maven.aliyun.com/repository/google/' }
+        maven { url'https://maven.aliyun.com/repository/jcenter/' }
+        maven { url'https://maven.aliyun.com/repository/central/' }
+        jcenter { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
         mavenLocal()
         google()
         jcenter()
@@ -27,6 +33,12 @@ buildscript {
 
 allprojects {
     repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url'https://maven.aliyun.com/repository/public/' }
+        maven { url'https://maven.aliyun.com/repository/google/' }
+        maven { url'https://maven.aliyun.com/repository/jcenter/' }
+        maven { url'https://maven.aliyun.com/repository/central/' }
+        jcenter { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
         mavenLocal()
         google()
         jcenter()

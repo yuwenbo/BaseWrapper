@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="usage.ywb.wrapper.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,14 +19,14 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity android:name=".modules.home.ui.LoginActivity">
-
-        </activity>
-
-        <activity android:name=".modules.home.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".modules.home.ui.MainActivity">
+
         </activity>
 
         <activity android:name=".modules.home.ui.TestSearchActivity" />

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
 
@@ -35,6 +37,9 @@ android {
 }
 
 dependencies {
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21"//主要是这两个依赖
+//    implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.0"//主要是这两个依赖
+
     implementation project(path: ':core:net')
     implementation project(path: ':base:mvp')
     implementation project(path: ':base:pluggable')

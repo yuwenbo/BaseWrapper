@@ -32,7 +32,15 @@ class LoginActivity : BaseWrapperActivity(), LoginView<User> {
         setContentView(R.layout.activity_login)
         usernameEt = findViewById(R.id.login_username_et)
         findViewById<Button>(R.id.login_btn).setOnClickListener {
-            loginPresenter!!.getDomain(usernameEt!!.text.toString())
+//            loginPresenter!!.getDomain(usernameEt!!.text.toString())
+            loop@ for (i in 1..10) {
+                print("i = $i")
+                for (j in 1..10) {
+                    print("j = $j")
+                    if (j == 3) continue@loop
+                    print("$i-$j")
+                }
+            }
         }
     }
 

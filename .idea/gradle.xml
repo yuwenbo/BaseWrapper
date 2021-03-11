@@ -25,6 +25,8 @@
             <option value="$PROJECT_DIR$/core/sqlite" />
             <option value="$PROJECT_DIR$/core/video" />
             <option value="$PROJECT_DIR$/modules" />
+            <option value="$PROJECT_DIR$/modules/mvvmdemo" />
+            <option value="$PROJECT_DIR$/modules/navigation" />
             <option value="$PROJECT_DIR$/modules/player" />
           </set>
         </option>

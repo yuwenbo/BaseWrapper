@@ -1,3 +1,6 @@
+include ':modules:chinesechess'
+include ':modules:gamemerge10'
+include ':modules:game2048'
 include ':modules:navigation'
 include ':modules:mvvmdemo'
 rootProject.name='BaseWrapper'

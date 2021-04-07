@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <usage.ywb.demo.chinesechess.ChessBoardView
+        android:id="@+id/cbv_chess_board"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <usage.ywb.demo.chinesechess.ChessLayout
+        android:id="@+id/chess_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_chess_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_blue"
+            android:padding="8dp"
+            android:text="悔棋一步" />
+
+        <TextView
+            android:id="@+id/tv_chess_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/bg_item_blue"
+            android:padding="8dp"
+            android:text="重新开始" />
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

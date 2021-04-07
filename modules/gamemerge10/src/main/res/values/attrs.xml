@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="GameLayout">
+        <attr name="padding" format="dimension"/>
+        <attr name="numSize" format="integer"/>
+        <attr name="boxColor" format="color"/>
+        <attr name="boxTextSize" format="dimension"/>
+    </declare-styleable>
+
+</resources>

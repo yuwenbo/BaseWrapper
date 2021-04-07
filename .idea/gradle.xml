@@ -25,6 +25,9 @@
             <option value="$PROJECT_DIR$/core/sqlite" />
             <option value="$PROJECT_DIR$/core/video" />
             <option value="$PROJECT_DIR$/modules" />
+            <option value="$PROJECT_DIR$/modules/chinesechess" />
+            <option value="$PROJECT_DIR$/modules/game2048" />
+            <option value="$PROJECT_DIR$/modules/gamemerge10" />
             <option value="$PROJECT_DIR$/modules/mvvmdemo" />
             <option value="$PROJECT_DIR$/modules/navigation" />
             <option value="$PROJECT_DIR$/modules/player" />

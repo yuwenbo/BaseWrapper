@@ -3,7 +3,7 @@
  */
 ext {
 
-    isLibraryModuleAudio = true
+    isLibraryModuleAudio = false
     isLibraryModuleCamera = true
     isLibraryModuleVideo = true
 

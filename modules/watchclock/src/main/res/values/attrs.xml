@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="clockPoint">
+        <attr name="hoursColor" format="color" />
+        <attr name="minuteColor" format="color" />
+        <attr name="secondColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="clockPlate">
+        <attr name="plateColor" format="color" />
+        <attr name="plateBackground" format="color" />
+        <attr name="platePadding" format="dimension" />
+        <attr name="plateTextSize" format="dimension" />
+        <attr name="plateDialSize" format="dimension" />
+    </declare-styleable>
+
+</resources>

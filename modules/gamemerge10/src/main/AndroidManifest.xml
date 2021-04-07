@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="usage.ywb.demo.gamemerge10">
+    package="usage.ywb.wrapper.gamemerge10">
 
     <application
         android:allowBackup="true"

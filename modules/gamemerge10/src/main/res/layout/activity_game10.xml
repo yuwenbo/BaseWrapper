@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <usage.ywb.demo.gamemerge10.GameLayout
+    <usage.ywb.wrapper.gamemerge10.GameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#efefef"

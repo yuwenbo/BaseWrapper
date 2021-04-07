@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:clock="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="时钟"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_clock_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#333333"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <usage.ywb.wrapper.watchclock.ClockPlate
+            android:id="@+id/cp_clock_plate"
+            android:layout_width="900px"
+            android:layout_height="900px"
+            android:layout_gravity="center"
+            clock:plateBackground="#333333"
+            clock:plateColor="#bbffffff"
+            clock:plateDialSize="9px"
+            clock:platePadding="24px"
+            clock:plateTextSize="54px" />
+
+        <usage.ywb.wrapper.watchclock.ClockPoints
+            android:id="@+id/cp_clock_point"
+            android:layout_width="750px"
+            android:layout_height="750px"
+            android:layout_gravity="center"
+            clock:hoursColor="@color/green"
+            clock:minuteColor="@color/blue" />
+
+        <usage.ywb.wrapper.watchclock.ClockSeconds
+            android:id="@+id/cs_clock_seconds"
+            android:layout_width="750px"
+            android:layout_height="750px"
+            android:layout_gravity="center" />
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

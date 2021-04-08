@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import usage.ywb.wrapper.mvp.R;
-import usage.ywb.wrapper.mvp.utils.StatusBarUtil;
 import usage.ywb.wrapper.mvp.widgets.SearchLayout;
 import usage.ywb.wrapper.mvp.ui.BaseActivity;
+import usage.ywb.wrapper.utils.StatusBarUtil;
 
 /**
  * @author yuwenbo

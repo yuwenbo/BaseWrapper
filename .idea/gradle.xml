@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/base/mvp" />
             <option value="$PROJECT_DIR$/base/mvvm" />
             <option value="$PROJECT_DIR$/base/pluggable" />
+            <option value="$PROJECT_DIR$/base/universal" />
             <option value="$PROJECT_DIR$/base/widgets" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/audio" />
@@ -29,7 +30,6 @@
             <option value="$PROJECT_DIR$/modules/game2048" />
             <option value="$PROJECT_DIR$/modules/gamemerge10" />
             <option value="$PROJECT_DIR$/modules/mvvmdemo" />
-            <option value="$PROJECT_DIR$/modules/navigation" />
             <option value="$PROJECT_DIR$/modules/player" />
             <option value="$PROJECT_DIR$/modules/watchclock" />
           </set>

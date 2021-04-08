@@ -2,7 +2,6 @@ package usage.ywb.wrapper.video.player.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import usage.ywb.wrapper.mvvm.ui.BaseWrapperActivity;
-import usage.ywb.wrapper.mvvm.utils.PermissionUtils;
+import usage.ywb.wrapper.utils.PermissionUtils;
 import usage.ywb.wrapper.video.R;
 import usage.ywb.wrapper.video.databinding.VideoActivityListBinding;
 import usage.ywb.wrapper.video.player.model.VideoData;

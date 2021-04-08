@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':base:universal')
 
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["multidex"]
@@ -59,6 +60,7 @@ dependencies {
     // 替换成最新版本, 需要注意的是api
     // 要与compiler匹配使用，均使用最新版可以保证兼容
     implementation rootProject.ext.dependencies["arouter_api"]
+
     annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
 
 }

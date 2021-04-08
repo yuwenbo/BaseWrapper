@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 
 import usage.ywb.wrapper.mvvm.R;
-import usage.ywb.wrapper.mvvm.utils.StatusBarUtil;
 import usage.ywb.wrapper.mvvm.widgets.SearchLayout;
+import usage.ywb.wrapper.utils.StatusBarUtil;
 
 /**
  * @author yuwenbo

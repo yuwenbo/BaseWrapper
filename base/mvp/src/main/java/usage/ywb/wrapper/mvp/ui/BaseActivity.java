@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import usage.ywb.wrapper.mvp.presenter.IBasePresenter;
 import usage.ywb.wrapper.mvp.proxy.IPresenterProxy;
 import usage.ywb.wrapper.mvp.proxy.PresenterProxyImpl;
-import usage.ywb.wrapper.mvp.utils.PermissionUtils;
+import usage.ywb.wrapper.utils.PermissionUtils;
 
 
 /**

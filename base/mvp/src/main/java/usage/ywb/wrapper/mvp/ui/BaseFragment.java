@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import usage.ywb.wrapper.mvp.presenter.IBasePresenter;
 import usage.ywb.wrapper.mvp.proxy.IPresenterProxy;
 import usage.ywb.wrapper.mvp.proxy.PresenterProxyImpl;
+import usage.ywb.wrapper.utils.PermissionUtils;
 
 /**
  * 通过{@link IBasePresenter}，来实现View层对Presenter的依赖，同时做了内存泄漏的预防处理。
@@ -19,7 +21,7 @@ import usage.ywb.wrapper.mvp.proxy.PresenterProxyImpl;
  * @author ywb
  * @version [ V.1.0.0  2020/3/9 ]
  */
-public abstract class BaseFragment extends Fragment implements IBaseView {
+public class BaseFragment extends Fragment implements IBaseView, PermissionUtils.PermissionCallbacks {
 
 
     private LoadingDialog loadingDialog;
@@ -97,5 +99,19 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
         super.onDestroy();
     }
 
+    @Override
+    public final void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
 
+    @Override
+    public void onPermissionsGranted(int requestCode, String[] perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, String[] perms) {
+
+    }
 }

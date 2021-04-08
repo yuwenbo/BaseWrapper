@@ -8,8 +8,8 @@ import android.util.Log
 import butterknife.OnClick
 import usage.ywb.wrapper.R
 import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity
-import usage.ywb.wrapper.mvp.utils.PermissionUtils
 import usage.ywb.wrapper.pluggable.core.PluginHelper
+import usage.ywb.wrapper.utils.PermissionUtils
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

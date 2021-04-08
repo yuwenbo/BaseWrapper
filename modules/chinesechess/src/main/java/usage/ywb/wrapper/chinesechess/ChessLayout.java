@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import usage.ywb.wrapper.mvp.utils.DensityUtil;
-
+import usage.ywb.wrapper.utils.DensityUtil;
 
 /**
  * 象棋棋子分布布局

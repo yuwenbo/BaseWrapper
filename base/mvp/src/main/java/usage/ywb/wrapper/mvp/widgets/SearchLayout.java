@@ -16,7 +16,7 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import usage.ywb.wrapper.mvp.R;
-import usage.ywb.wrapper.mvp.utils.InputMethodUtils;
+import usage.ywb.wrapper.utils.InputMethodUtils;
 
 
 /**

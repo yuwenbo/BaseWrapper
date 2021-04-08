@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <usage.ywb.demo.chinesechess.ChessBoardView
+    <usage.ywb.wrapper.chinesechess.ChessBoardView
         android:id="@+id/cbv_chess_board"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <usage.ywb.demo.chinesechess.ChessLayout
+    <usage.ywb.wrapper.chinesechess.ChessLayout
         android:id="@+id/chess_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

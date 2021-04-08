@@ -4,7 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import usage.ywb.wrapper.mvp.utils.LogUtils;
+import usage.ywb.wrapper.utils.LogUtils;
+
 
 /**
  * @author yuwenbo

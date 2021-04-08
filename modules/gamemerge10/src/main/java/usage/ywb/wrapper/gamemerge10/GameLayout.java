@@ -21,7 +21,7 @@ import android.view.animation.TranslateAnimation;
 import java.util.ArrayList;
 import java.util.List;
 
-import usage.ywb.wrapper.mvp.utils.DensityUtil;
+import usage.ywb.wrapper.utils.DensityUtil;
 
 
 /**

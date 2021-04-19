@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-public final class DecimalUtil {
+public final class DecimalUtils {
 
 
     public static final int DEFAULT_PRECISION = 2;

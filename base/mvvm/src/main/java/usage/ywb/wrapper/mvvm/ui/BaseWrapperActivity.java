@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding;
 
 import usage.ywb.wrapper.mvvm.R;
 import usage.ywb.wrapper.mvvm.widgets.TitleLayout;
-import usage.ywb.wrapper.utils.StatusBarUtil;
+import usage.ywb.wrapper.utils.StatusBarUtils;
 
 /**
  * @author yuwenbo
@@ -20,7 +20,7 @@ public abstract class BaseWrapperActivity<VDB extends ViewDataBinding>  extends 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setTranslucentForImageView(this, 0, null);//设置状态栏透明
+        StatusBarUtils.setTranslucentForImageView(this, 0, null);//设置状态栏透明
     }
 
     protected void setTitleView(TitleLayout titleLayout) {

@@ -21,7 +21,7 @@ import android.view.animation.TranslateAnimation;
 import java.util.ArrayList;
 import java.util.List;
 
-import usage.ywb.wrapper.utils.DensityUtil;
+import usage.ywb.wrapper.utils.DensityUtils;
 
 
 /**
@@ -137,7 +137,7 @@ public class GameLayout extends ViewGroup implements View.OnClickListener {
                 mainArray[rol][row] = round;
                 cacheArray[rol][row] = round;
                 BlockView blockView = new BlockView(getContext());
-                blockView.setTextSize(DensityUtil.px2sp(getContext(), mTextSize));
+                blockView.setTextSize(DensityUtils.px2sp(getContext(), mTextSize));
                 blockView.setNumber(round);
                 blockView.setPosition(rol, row);
                 blockView.setOnClickListener(this);

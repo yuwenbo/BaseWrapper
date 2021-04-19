@@ -18,7 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import usage.ywb.wrapper.R;
 
 
-public class StatusBarUtil {
+public class StatusBarUtils {
 
     public static final int DEFAULT_STATUS_BAR_ALPHA = 112;
     private static final int TAG_KEY_HAVE_SET_OFFSET = -123;

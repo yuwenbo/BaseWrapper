@@ -6,6 +6,7 @@ import android.content.ContextWrapper;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -16,6 +17,8 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import usage.ywb.wrapper.utils.DensityUtils;
+import usage.ywb.wrapper.utils.InputMethodUtils;
 import usage.ywb.wrapper.widgets.R;
 
 /**
@@ -23,6 +26,7 @@ import usage.ywb.wrapper.widgets.R;
  * @version [ V.1.0.0  2020/3/9 ]
  */
 public class BottomDialog extends BottomSheetDialog {
+
 
     private View contentView;
 
@@ -56,7 +60,14 @@ public class BottomDialog extends BottomSheetDialog {
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 }
             }
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         }
+    }
+
+    @Override
+    public void dismiss() {
+        InputMethodUtils.hide(getCurrentFocus());
+        super.dismiss();
     }
 
     @Override
@@ -84,6 +95,14 @@ public class BottomDialog extends BottomSheetDialog {
             });
         }
         contentView = view;
+    }
+
+    protected void setTopOffset(int offset) {
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        int height = DensityUtils.getWindowsWidthAndHeight(getContext())[1];
+        layoutParams.height = height - offset;
+        getWindow().setAttributes(layoutParams);
+        getWindow().setGravity(Gravity.BOTTOM);
     }
 
     public View getContentView() {

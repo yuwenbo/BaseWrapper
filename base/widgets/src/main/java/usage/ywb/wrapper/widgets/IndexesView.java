@@ -35,10 +35,12 @@ public class IndexesView extends View {
     // 触摸时间
     private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
 
-    // 26个字母
+    // 26个字母+“#”
     public String[] labels = {"#", "A", "B", "C", "D", "E", "F", "G", "H", "I",
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
             "W", "X", "Y", "Z"};
+
+    private static final int MAX_LENGTH = 27;
 
     private int choose; // 选中
     private Paint paint = new Paint();
@@ -72,7 +74,7 @@ public class IndexesView extends View {
         int height = getHeight(); // 获取对应高度
         int width = getWidth();   // 获取对应宽度
         int length = labels.length;
-        singleHeight = height / 27;  // 获取每一个字母的高度
+        singleHeight = height / MAX_LENGTH;  // 获取每一个字母的高度
         for (int i = 0; i < labels.length; i++) {
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setAntiAlias(true);
@@ -84,10 +86,10 @@ public class IndexesView extends View {
                 paint.setFakeBoldText(true);
             }
             // x坐标等于中间-字符串宽度的一半
-            float xPos = width / 2 - paint.measureText(labels[i]) / 2;
+            float xPos = (width >> 1) - paint.measureText(labels[i]) / 2;
             float yPos;
-            if (length <= 27) {
-                yPos = (height - singleHeight * length) / 2 + singleHeight * i + singleHeight / 2;
+            if (length <= MAX_LENGTH) {
+                yPos = ((height - singleHeight * length) >> 1) + singleHeight * i + (singleHeight >> 1);
             } else {
                 yPos = singleHeight * i + singleHeight;
             }
@@ -104,7 +106,7 @@ public class IndexesView extends View {
         final OnTouchingLetterChangedListener listener = onTouchingLetterChangedListener;
         int length = labels.length;
         int c;
-        if (length <= 27) {
+        if (length <= MAX_LENGTH) {
             c = (int) ((y - (getHeight() - singleHeight * length) / 2) / singleHeight);
         } else {
             c = (int) (y / getHeight() * length);

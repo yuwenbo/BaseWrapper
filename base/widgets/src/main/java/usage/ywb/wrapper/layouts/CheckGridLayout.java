@@ -1,4 +1,4 @@
-package usage.ywb.wrapper.widgets;
+package usage.ywb.wrapper.layouts;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +12,8 @@ import androidx.annotation.IdRes;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import usage.ywb.wrapper.widgets.R;
 
 /**
  * @author yuwenbo

@@ -10,7 +10,7 @@ import butterknife.Unbinder;
 import usage.ywb.wrapper.mvp.R;
 import usage.ywb.wrapper.mvp.widgets.SearchLayout;
 import usage.ywb.wrapper.mvp.ui.BaseActivity;
-import usage.ywb.wrapper.utils.StatusBarUtil;
+import usage.ywb.wrapper.utils.StatusBarUtils;
 
 /**
  * @author yuwenbo
@@ -23,7 +23,7 @@ public class BaseSearchActivity extends BaseActivity implements SearchLayout.OnS
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setTranslucentForImageView(this, 0, null);//设置状态栏透明
+        StatusBarUtils.setTranslucentForImageView(this, 0, null);//设置状态栏透明
     }
 
     protected void setSearchView(SearchLayout searchLayout) {

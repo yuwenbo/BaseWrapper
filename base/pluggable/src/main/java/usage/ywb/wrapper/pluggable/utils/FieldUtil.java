@@ -33,6 +33,7 @@ public class FieldUtil {
                     return cls.getDeclaredField(name);
                 } catch (NoSuchFieldException ex) {
                     // Ignored
+                    ex.printStackTrace();
                 }
             }
             throw e;

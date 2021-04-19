@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 import butterknife.OnClick;
 import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity;
 
@@ -17,15 +19,35 @@ import usage.ywb.wrapper.mvp.common.activity.BaseWrapperActivity;
 public class MainActivity extends BaseWrapperActivity {
 
 
+    ThreadPoolExecutor e;
+
+
+    class RR implements Runnable{
+
+        @Override
+        public void run() {
+
+        }
+    }
+
+    RR rr;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+
+        Thread thread = new Thread(new RR());
+        thread.start();
+        thread.run();
+        e.execute(rr);
     }
 
     @OnClick(R.id.audio_btn)
     protected void onClickAudio() {
         ARouter.getInstance().build("/audio/MainActivity").navigation();
+
     }
 
     @OnClick(R.id.video_btn)

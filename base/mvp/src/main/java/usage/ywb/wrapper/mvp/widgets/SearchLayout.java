@@ -73,7 +73,7 @@ public class SearchLayout extends RelativeLayout implements View.OnClickListener
             if (id == LEFT_ID) {
                 onSearchClickListener.onLeftClick((TextView) v);
             } else if (id == RIGHT_ID) {
-                InputMethodUtils.hide(getContext(), mSearchView);
+                InputMethodUtils.hide(mSearchView);
                 onSearchClickListener.onSearchClick((TextView) v);
             }
         }
@@ -183,7 +183,7 @@ public class SearchLayout extends RelativeLayout implements View.OnClickListener
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            InputMethodUtils.hide(getContext(), v);
+            InputMethodUtils.hide(v);
             if (onSearchClickListener != null) {
                 onSearchClickListener.onSearchClick(v);
             }

@@ -30,8 +30,8 @@ public class InputMethodUtils {
     /**
      * 调用隐藏系统默认的输入法
      */
-    public static void hide(Context context, Activity activity) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static void hide(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.hideSoftInputFromWindow(Objects.requireNonNull(activity.getCurrentFocus()).getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
@@ -43,8 +43,11 @@ public class InputMethodUtils {
      *
      * @param view 接受软键盘输入的视图
      */
-    public static void hide(Context context, View view) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static void hide(View view) {
+        if (view == null) {
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
         }
@@ -55,8 +58,11 @@ public class InputMethodUtils {
      *
      * @param view 接受软键盘输入的视图
      */
-    public static void show(Context context, View view) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static void show(View view) {
+        if (view == null) {
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);//SHOW_FORCED表示强制显示
         }

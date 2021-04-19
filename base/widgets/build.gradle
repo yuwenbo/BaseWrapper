@@ -31,5 +31,6 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["recyclerview"]
+    implementation project(path: ':base:universal')
 
 }

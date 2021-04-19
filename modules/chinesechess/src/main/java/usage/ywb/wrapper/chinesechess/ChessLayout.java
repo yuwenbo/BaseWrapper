@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import usage.ywb.wrapper.utils.DensityUtil;
+import usage.ywb.wrapper.utils.DensityUtils;
 
 /**
  * 象棋棋子分布布局
@@ -66,7 +66,7 @@ public class ChessLayout extends ViewGroup {
         for (ChessPieces chessPieces : piecesList) {
             ChessPiecesView piecesView = new ChessPiecesView(getContext());
             piecesView.setChessPieces(chessPieces);
-            piecesView.setTextSize(DensityUtil.px2dip(getContext(), 0.6f * mChessWidth));
+            piecesView.setTextSize(DensityUtils.px2dip(getContext(), 0.6f * mChessWidth));
             LayoutParams params = new LayoutParams(mChessWidth, mChessWidth);
             piecesView.setLayoutParams(params);
             addView(piecesView);

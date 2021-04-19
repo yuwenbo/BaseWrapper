@@ -1,14 +1,16 @@
 package usage.ywb.wrapper.utils;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.WindowManager;
 
 /**
  * dp与px相互转换的工具类
  *
  * @author yansu
  */
-public class DensityUtil {
+public class DensityUtils {
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -56,6 +58,34 @@ public class DensityUtil {
 
     public static int sp2px(Context context, int spValue) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, context.getResources().getDisplayMetrics());
+    }
+
+
+    public static float getDensity(Context context) {
+        DisplayMetrics metric = new DisplayMetrics();
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(metric);
+        return metric.density;
+    }
+
+    public static int getDensity(Context context, float value) {
+        return (int) getDensityFloat(context, value);
+    }
+
+    public static float getDensityFloat(Context context, float value) {
+        DisplayMetrics metric = new DisplayMetrics();
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(metric);
+        return metric.density * value;
+    }
+
+    public static int[] getWindowsWidthAndHeight(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        int width = outMetrics.widthPixels;
+        int height = outMetrics.heightPixels;
+        return new int[]{width, height};
     }
 
 }
